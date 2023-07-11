@@ -13,15 +13,28 @@
   }
 }
 
+@font-face {
+  font-family: 'MedievalFont';
+  src: url('../src/fonts/Ancient\ Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'GothicFont';
+  src: url('./fonts/Enchanted\ Land.otf') format('truetype');
+}
+
+
+
 .App-header {
-  background-color: #282c34;
+  background-color: #f3d571;
   min-height: 100vh;
   display: flex;
+  font-size: larger;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(236, 50, 50);
+  font-family: 'GothicFont', sans-serif;
 }
 
 .App-link {
