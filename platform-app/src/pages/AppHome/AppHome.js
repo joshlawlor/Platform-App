@@ -14,7 +14,7 @@ function AppHome(){
         <img src={dagger} className="App-logo" alt="logo" />
         <div>
           <button onClick={() => navigate('/login')}>Login</button>
-          <button>Sign Up</button>
+          <button onClick={() => navigate('/register')}>Sign Up</button>
         </div>
       </div>
     )
