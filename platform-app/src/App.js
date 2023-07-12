@@ -5,7 +5,7 @@ import './App.css';
 
 //PAGES IMPORTS
 import AppHome from './pages/AppHome/AppHome';
-
+import AppLogin from './pages/AppLogin/AppLogin';
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +13,7 @@ function App() {
     
     <Routes>
       <Route path="/" element={<AppHome/>}/>
+      <Route path="/login" element={<AppLogin/>}/>
     </Routes>
     </BrowserRouter>
     

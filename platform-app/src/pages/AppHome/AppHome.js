@@ -1,10 +1,10 @@
 import React from 'react';
 import './AppHome.css'
 import dagger from '../../components/images/dagger.png'
-
+import { useNavigate } from 'react-router-dom';
 
 function AppHome(){
-
+  const navigate = useNavigate();
     return(
         <div className="App">
         <header className="App-header">
@@ -13,7 +13,7 @@ function AppHome(){
         </header>
         <img src={dagger} className="App-logo" alt="logo" />
         <div>
-          <button>Login</button>
+          <button onClick={() => navigate('/login')}>Login</button>
           <button>Sign Up</button>
         </div>
       </div>
