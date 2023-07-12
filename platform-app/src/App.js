@@ -1,16 +1,21 @@
-import logo from './logo.svg';
-import dagger from './dagger.png';
+import {Route, Routes, BrowserRouter} from 'react-router-dom'
+
+
 import './App.css';
+
+//PAGES IMPORTS
+import AppHome from './pages/AppHome/AppHome';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      <h1>Dungeons & Dummies</h1>
-      <br/>
-        <img src={dagger} className="App-logo" alt="logo" />
-      </header>
-    </div>
+    <BrowserRouter>
+ 
+    
+    <Routes>
+      <Route path="/" element={<AppHome/>}/>
+    </Routes>
+    </BrowserRouter>
+    
   );
 }
 
