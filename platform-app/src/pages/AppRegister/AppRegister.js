@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState , useEffect} from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useSignupState } from '../../context/SignUpProvider';
-
+import dragon from '../../components/images/dragon.png'
 function AppRegister() {
   const navigate = useNavigate();
 
@@ -19,8 +19,8 @@ function AppRegister() {
 
   const appSignup = async (e) => {
     //REMOVE AFTER TESTING IS FINISHED
-    e.preventDefault();
-    
+    // e.preventDefault();
+
     // if (password !== password2) {
     //   await setNotificationState({
     //     open: true,
@@ -44,23 +44,15 @@ function AppRegister() {
     await setpassword2(e.target.value);
   };
   return (
-    // <div>
-    //   <button onClick={() => navigate("/")}>BACK</button>
-    //   <h1>REGISTRATION PAGE</h1>
-    // </div>
-
-
-  
-    
       <div className="AppOB1-container">
         <div className="back-container">
           <button className="aob1-back-btn" onClick={() => navigate('/')}>
             <AiOutlineArrowLeft className="back-arrow" /> <p>Back</p>
           </button>
         </div>        
-        {/* <div className="logo-container">
-          <img className="Logo" src={logo} alt="Logo" />
-        </div> */}
+        <div className="logo-container">
+          <img className="Logo" src={dragon} alt="Logo" />
+        </div>
         <div className="AppOB1-body">
           <header className="appsub-header">
             <h3>Create an account</h3>
