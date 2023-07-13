@@ -1,4 +1,5 @@
 import React from "react";
+import './AppRegister.css'
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
@@ -9,7 +10,7 @@ function AppRegister() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setpassword2] = useState("");
-  const [signupState, setSignupState] = useState("");
+  const [signupState, setSignupState] = useState({email: email, password: password});
 
   const appSignup = async () => {
     // if (password !== password2) {
@@ -21,6 +22,8 @@ function AppRegister() {
     //   return;
     // }
     setSignupState({ ...signupState, email, password });
+     console.log(signupState);
+     window.alert('CONFIRM')
   };
 
   let handleEmail = async (e) => {

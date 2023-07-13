@@ -1,0 +1,251 @@
+.AppOB1-container {
+    margin: 0 0 0 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 !important;
+  }
+  
+  .AppOB1-body {
+    margin: 0 0 0 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0 !important;
+  }
+  
+  .back-container{
+    width: 100%;
+    height: 60px;
+    padding: 0 !important;
+  }
+  
+  .logo-container{
+    width: 100%;
+    min-height: 60px;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 !important;
+  }
+  
+  .Logo{
+    margin: 0 0 0 0;
+  }
+  
+  @media screen and (max-width: 563px){
+    .logo-container{
+      display: none !important;
+    }
+  }
+  
+  .aob1-back-btn{
+    position: relative !important;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    color: #426180 !important;
+    cursor: pointer;
+    font-family: 'Poppins' !important;
+    font-style: normal;
+    font-weight: 600 !important;
+    font-size: 17px;
+    line-height: 28px;
+    height: 60px !important;
+    padding: 0 !important;
+  }
+  
+  .aob1-back-btn p{
+    margin: auto 0 auto 8px;
+  }
+  
+  .backButton svg {
+    margin-right: 8px;
+  }
+  
+  .backButton:hover {
+    text-decoration: underline;
+  }
+  
+  .back-arrow{
+    color: #909FE9;  
+  }
+  
+  .appsub-header {
+    text-align: center;
+    margin: 24px 0 32px 0 !important;
+  }
+  
+  .appsub-header h3 {
+    width: 366px;
+    text-align: center !important;
+    font-family: 'GothicFont';
+    font-style: normal;
+    font-weight: 700;
+    font-size: calc(45px + 2vmin);
+    line-height: 28px;
+    color: rgb(236, 50, 50);  
+    margin: 0 auto 0 auto;
+  }
+  
+  .form-container {
+    align-self: center;
+    width: 366px;
+    margin: 0 auto 36px auto !important;
+  }
+  
+  .form-label {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #486581;
+    margin: 0 0 2px 0 !important;
+  }
+  
+  ::placeholder{
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #9AA5B1 !important;
+  }
+  
+  .form-item{
+    width: 100%;
+    height: 69px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .form-control{
+    width: 366px;
+    height: 44px !important;
+    border: 1px solid #E7EBFF !important;
+    border-radius: 4px;
+    box-shadow: none;
+  }
+  
+  .form-select{
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px !important;
+    line-height: 21px !important;
+    color: #9AA5B1 !important;  
+  }
+  
+  .eye-icon{
+    height: 26px;
+    width: auto;
+    color: #9AA5B1;
+    position: absolute;
+    top: 9.5px;
+    right: 14px;
+  }
+  
+  .AppOB1-email{
+    margin: 0 0 32px 0;
+  }
+  
+  .AppOB1-password{
+    margin: 0 0 32px 0;
+  }
+  
+  .AppOB1-confirm{
+    margin: 0 0 48px 0;
+  }
+  
+  .createButton{
+    width: 366px;
+    height: 48px;
+    background: rgb(236, 50, 50) !important;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Poppins' !important;
+    font-style: normal;
+    font-weight: 700 !important;
+    font-size: 17px !important;
+    line-height: 26px !important;
+    text-align: center;
+    color: #fcfcfc !important;
+  }
+  
+  .createButton:hover {
+    background-color:  rgb(236, 50, 50);
+  }
+  
+  .login{
+    margin: 36px auto 0 auto;
+  }
+  
+  .login-text {
+    margin: 0;
+    font-family: 'Lato' !important;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #334E68;
+  }
+  
+  .login-text a {
+    color: #334E68;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .login-text a:hover {
+    text-decoration: underline;
+  }
+  
+  .progress-ring-container{
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .one-fourth{
+    position: absolute;
+    border-top-right-radius: 200px;
+    width: 40px;
+    height: 40px;
+    background-color: #F3B3AB;
+    margin: -40px 0 0 40px;
+  }
+  
+  .white-circle{
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background-color: white;
+    border-radius: 50%;
+    margin: auto;
+  }
+  
+  .next-button{
+    position: absolute;
+    width: auto;
+    height: auto;
+    margin: -87px 0 0 -22px;
+  }
+  
+  .next-button-arrow{
+    width: 60px;
+    height: 60px;
+    padding: 8px;
+    color: #49548B;
+    background-color: #A7B5F9;
+    box-shadow: 0px 8px 32px rgba(254, 103, 103, 0.2);
+    border-radius: 50%;
+    margin: 0;
+  }
+  .AppOB1-form {
+    position: relative;
+  }
+  
