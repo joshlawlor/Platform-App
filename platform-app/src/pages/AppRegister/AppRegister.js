@@ -1,8 +1,9 @@
 import React from "react";
 import './AppRegister.css'
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { useSignupState } from '../../context/SignUpProvider';
 
 function AppRegister() {
   const navigate = useNavigate();
@@ -10,9 +11,16 @@ function AppRegister() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setpassword2] = useState("");
-  const [signupState, setSignupState] = useState({email: email, password: password});
+  const [signupState, setSignupState] = useSignupState();
 
-  const appSignup = async () => {
+  useEffect(() => {
+    console.log(JSON.stringify(signupState));
+  }, [signupState]);
+
+  const appSignup = async (e) => {
+    //REMOVE AFTER TESTING IS FINISHED
+    e.preventDefault();
+    
     // if (password !== password2) {
     //   await setNotificationState({
     //     open: true,
@@ -22,8 +30,6 @@ function AppRegister() {
     //   return;
     // }
     setSignupState({ ...signupState, email, password });
-     console.log(signupState);
-     window.alert('CONFIRM')
   };
 
   let handleEmail = async (e) => {
@@ -48,7 +54,7 @@ function AppRegister() {
     
       <div className="AppOB1-container">
         <div className="back-container">
-          <button className="aob1-back-btn" onClick={() => navigate(-1)}>
+          <button className="aob1-back-btn" onClick={() => navigate('/')}>
             <AiOutlineArrowLeft className="back-arrow" /> <p>Back</p>
           </button>
         </div>        
@@ -60,7 +66,7 @@ function AppRegister() {
             <h3>Create an account</h3>
           </header>
           <div className="form-container">
-            <form className="AppOB1-form" onSubmit={() => appSignup()}>
+            <form className="AppOB1-form" onSubmit={appSignup}>
               <div className="AppOB1-email form-item">
                 <label for="email" className="form-label">
                   Your email
