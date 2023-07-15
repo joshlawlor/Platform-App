@@ -1,5 +1,9 @@
-import {React, useState} from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useState , useEffect} from 'react';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import dragon from '../../components/images/dragon.png'
+import './AppLogin.css'
 
 function AppLogin() {
   const navigate = useNavigate();
@@ -8,47 +12,83 @@ function AppLogin() {
   const [requestBody, setRequestBody] = useState({});
 
 
-  const submitHandler = (e) => {
+  const appLogin = (e) => {
     setRequestBody({...requestBody, email, password})
   }
+  
+  let handleEmail = async (e) => {
+    await setEmail(e.target.value);
+  };
+
+  let handlePassword = async (e) => {
+    await setPassword(e.target.value);
+  };
 
   return (
-    <div className="login-container">
-      <form className="formlog" onSubmit={submitHandler}>
-        <div className="login-header">
-          <div className="title">Log in to access your account</div>
-        </div>
-        <label>
-          email:
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label className="relative">
-          Password:
-          <div className="relative">
-            <input
-              type={"password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-        </label>
-        <br></br>
-        <button type="submit" value="Login">
-          Log in
+    <div className="AppOB1-container">
+      <div className="back-container">
+        <button className="aob1-back-btn" onClick={() => navigate('/')}>
+          <AiOutlineArrowLeft className="back-arrow" /> <p>Back</p>
         </button>
-      </form>
-      <footer className="footer">
-        <h5 className="register">
-          Need to signup for an account?{" "}
-          <Link to="/register" id="registerLink">
-            <strong>Register Here</strong>
-          </Link>
-        </h5>
-      </footer>
+      </div>        
+      <div className="logo-container">
+        <img className="Logo" src={dragon} alt="Logo" />
+      </div>
+      <div className="AppOB1-body">
+        <header className="appsub-header">
+          <h3>Log in to your Account</h3>
+        </header>
+        <div className="form-container">
+          <form className="AppOB1-form" onSubmit={appLogin}>
+            <div className="AppOB1-email form-item">
+              <label for="email" className="form-label">
+                Your email
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                placeholder="Enter your email"
+                onChange={handleEmail}
+                aria-describedby="emailHelp"
+                required
+              />
+            </div>
+            <div className="AppOB1-password relative">
+              <label for="password" className="form-label">
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  type={"password"}
+                  className="form-control"
+                  id="password"
+                  placeholder="Enter your password"
+                  required
+                  onChange={handlePassword}
+                  minlength="8"
+                />
+              </div>
+            </div>
+            <div className="create-account">
+              <button type="submit" className="btn fw-bold createButton">
+                Create Account
+              </button>
+            </div>
+          </form>
+        </div>
+        <div className="login">
+          <p className="login-text">
+            Don't have an account?
+            <span>
+              {" "}
+              <a href="/register" id="loginLink">
+                Register Here
+              </a>
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
