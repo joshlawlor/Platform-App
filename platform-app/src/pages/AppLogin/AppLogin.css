@@ -22,6 +22,24 @@
   .login-header img {
     margin: 20px;
   }
+
+    
+  .apploginsub-header {
+    text-align: center;
+    margin: 24px 0 32px 0 !important;
+  }
+  
+  .apploginsub-header h3 {
+    width: 466px;
+    text-align: center !important;
+    font-family: 'GothicFont';
+    font-style: normal;
+    font-weight: 700;
+    font-size: calc(45px + 2vmin);
+    line-height: 28px;
+    color: rgb(236, 50, 50);  
+    margin: 0 auto 0 auto;
+  }
   
   .title {
     display: block;
@@ -43,6 +61,37 @@
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   }
+
+   
+  .form-label {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1px;
+    line-height: 21px;
+    color: #486581;
+    margin: 0 0 2px 0 !important;
+    
+  }
+  
+  .form-control{
+    width: 366px;
+    height: 2px !important;
+    border: 1px solid #E7EBFF !important;
+    border-radius: 4px;
+    box-shadow: none;
+    border: 3px solid green;
+  }
+  
+  /* .relative {
+    border: 3px solid green;
+  } */
+
+  
+  .AppOB1-password{
+    margin: 0 0 32px 0;
+    border: 3px solid green;
+  }
   
   label {
     margin-bottom: 10px;
@@ -51,6 +100,7 @@
   }
   
   input {
+
     display: flex;
     flex-direction: column;
     padding: 10px;

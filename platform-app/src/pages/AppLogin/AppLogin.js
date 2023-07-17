@@ -35,7 +35,7 @@ function AppLogin() {
         <img className="Logo" src={dragon} alt="Logo" />
       </div>
       <div className="AppOB1-body">
-        <header className="appsub-header">
+        <header className="apploginsub-header">
           <h3>Log in to your Account</h3>
         </header>
         <div className="form-container">
@@ -54,7 +54,7 @@ function AppLogin() {
                 required
               />
             </div>
-            <div className="AppOB1-password relative">
+            <div className="AppLogin-password relative">
               <label for="password" className="form-label">
                 Password
               </label>
