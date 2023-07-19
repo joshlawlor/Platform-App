@@ -1,7 +1,7 @@
 const healthPath = '/health';
 const registerPath = '/register';
 const loginPath = '/login';
-const verifyPath = '/verify';
+const verifyPath = '/verified';
 
 exports.handler = async (e) => {
     console.log('Request Event:', e);
@@ -17,6 +17,13 @@ exports.handler = async (e) => {
       };
 
     if(e.httpMethod === 'GET' && e.path === healthPath) {
+        return response;
+    }
+    else if(e.httpMethod === 'POST' && e.path === registerPath) {
+        return response;
+    }else if(e.httpMethod === 'POST' && e.path === loginPath) {
+        return response;
+    }else if(e.httpMethod === 'POST' && e.path === verifyPath) {
         return response;
     }
     else {
