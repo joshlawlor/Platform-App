@@ -44,7 +44,7 @@ const login = async (user) => {
   const token = auth.generateToken(userInfo);
   const response = {
     user: userInfo,
-    token: token
+    token: token,
   };
   return util.updateResponse(200, response);
 };
