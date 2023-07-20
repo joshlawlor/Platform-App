@@ -16,21 +16,22 @@ const register = async (user) => {
   const email = user.email;
   const password = user.password;
 
+   //if this user exists in our database (same email, first, and last name), they cannot sign up again using the same credentials (we do not want multiple of the same user)
+   const dynamodbUser = await getUser(email);
+   if (dynamodbUser) {
+     return util.updateResponse(401, {
+       email: email,
+       message:
+         "User already exists under this email. Please choose different credentials.",
+     });
+   }
   //if a user does not filled out below fields, they will be directed to complete this sections
   if (!email || !password) {
     return util.updateResponse(401, {
       message: "All fields must be filled.",
     });
   }
-  //if this user exists in our database (same email, first, and last name), they cannot sign up again using the same credentials (we do not want multiple of the same user)
-  const dynamodbUser = await getUser(email);
-  if (dynamodbUser) {
-    return util.updateResponse(401, {
-      email: email,
-      message:
-        "User already exists under this email. Please choose different credentials.",
-    });
-  }
+ 
 
   //bcrypt the passwords for the user - the trim to to clean up white spaces
   const bcryptPassword = bcrypt.hashSync(password.trim(), 10);
