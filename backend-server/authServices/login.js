@@ -5,7 +5,7 @@ AWS.config.update({ region: "us-east-1" });
 //define the dynamobdb (this is our database)
 const dynamobdb = new AWS.DynamoDB.DocumentClient();
 //grab the dynamotable from AWS (dynamodb thrives off async functions)
-const dynamoTable = "demoApprentices";
+const dynamoTable = "dnd-users";
 //bcrypt to ensure that we do not save password in plain text
 const bcrypt = require("bcryptjs");
 // require utils/auth.js
@@ -44,7 +44,7 @@ const login = async (user) => {
   const token = auth.generateToken(userInfo);
   const response = {
     user: userInfo,
-    token: token,
+    token: token
   };
   return util.updateResponse(200, response);
 };

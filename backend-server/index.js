@@ -1,4 +1,5 @@
 const registerUser = require("./authServices/register");
+const loginUser = require("./authServices/login");
 
 const healthPath = "/health";
 const registerPath = "/register";
@@ -29,7 +30,8 @@ exports.handler = async (e) => {
     //for dyanamodb we want to use async functions
     return (response = await registerUser.register(registerBody));
   } else if (e.httpMethod === "POST" && e.path === loginPath) {
-    return response;
+    const loginBody = JSON.parse(e.body);
+    return (res = await loginUser.login(loginBody));
   } else if (e.httpMethod === "POST" && e.path === verifyPath) {
     return response;
   } else {
