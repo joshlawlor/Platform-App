@@ -80,7 +80,6 @@
     border: 1px solid #E7EBFF !important;
     border-radius: 4px;
     box-shadow: none;
-    border: 3px solid green;
   }
   
   /* .relative {
@@ -90,7 +89,6 @@
   
   .AppOB1-password{
     margin: 0 0 32px 0;
-    border: 3px solid green;
   }
   
   label {

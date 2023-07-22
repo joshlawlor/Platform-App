@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import './AppRegister.css'
 import { useNavigate } from "react-router-dom";
 import { useState , useEffect} from 'react';
@@ -19,7 +20,29 @@ function AppRegister() {
 
   const appSignup = async (e) => {
     //REMOVE AFTER TESTING IS FINISHED
-    // e.preventDefault();
+    e.preventDefault();
+    setSignupState({ ...signupState, email, password });
+    const requestConfig = {
+      headers: { 'Content-Type': 'application/json',
+      'x-api-key': 'eddiDzFpPE96dk5VsqKKb7IUVhyLDx9FaBMdiatz' },
+    }
+
+    const requestBody = {
+      email: signupState.email,
+      password: signupState.password
+    }
+
+    await axios
+    .post('https://iyufswqyje.execute-api.us-east-1.amazonaws.com/Development/register', requestBody, requestConfig)
+    .then((response) => {
+      //Create chat user
+      console.log('Success', response);
+      navigate('/');
+    })
+    .catch((error) => {
+      console.log('AXIOS ERROR', error);
+    });
+
 
     // if (password !== password2) {
     //   await setNotificationState({
@@ -29,7 +52,7 @@ function AppRegister() {
     //   });
     //   return;
     // }
-    setSignupState({ ...signupState, email, password });
+    
   };
 
   let handleEmail = async (e) => {
