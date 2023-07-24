@@ -6,6 +6,9 @@ import { useState , useEffect} from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useSignupState } from '../../context/SignUpProvider';
 import dragon from '../../components/images/dragon.png'
+
+const registerURL = process.env.REACT_APP_REGISTER_URL
+
 function AppRegister() {
   const navigate = useNavigate();
 
@@ -22,7 +25,7 @@ function AppRegister() {
   const appSignup = async (e) => {
     //REMOVE AFTER TESTING IS FINISHED
     e.preventDefault();
-    setSignupState({ ...signupState, username, email, password });
+   await setSignupState({ ...signupState, username, email, password });
     const requestConfig = {
       headers: { 'Content-Type': 'application/json',
       'x-api-key': 'eddiDzFpPE96dk5VsqKKb7IUVhyLDx9FaBMdiatz' },
@@ -35,7 +38,7 @@ function AppRegister() {
     }
 
     await axios
-    .post('https://iyufswqyje.execute-api.us-east-1.amazonaws.com/Development/register', requestBody, requestConfig)
+    .post(registerURL, requestBody, requestConfig)
     .then((response) => {
       //Create chat user
       console.log('Success', response);
