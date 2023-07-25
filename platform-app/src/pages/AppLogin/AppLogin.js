@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { setUserSession } from "../../service/AuthService";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -36,6 +37,8 @@ function AppLogin() {
 
     axios.post(loginURL, requestBody, requestConfig)
     .then((response) => {
+      setUserSession(response.data.user, response.data.token);
+      window.alert('Login successful', response.data.message);
       console.log(response)
     })   
   };
