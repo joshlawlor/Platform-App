@@ -6,8 +6,9 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import dragon from "../../components/images/dragon.png";
 import "./AppLogin.css";
 
+//ENV VARIABLES
 const loginURL = process.env.REACT_APP_LOGIN_URL
-
+const apiKey = process.env.REACT_APP_API_KEY  
 
 function AppLogin() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function AppLogin() {
 
   const requestConfig = {
     headers: { 'Content-Type': 'application/json',
-    'x-api-key': 'eddiDzFpPE96dk5VsqKKb7IUVhyLDx9FaBMdiatz' },
+    'x-api-key': apiKey },
   }
 
 
@@ -36,7 +37,7 @@ function AppLogin() {
     axios.post(loginURL, requestBody, requestConfig)
     .then((response) => {
       console.log(response)
-    })
+    })   
   };
 
   let handleEmail = async (e) => {
@@ -64,13 +65,13 @@ function AppLogin() {
         <div className="form-container">
           <form className="AppOB1-form" onSubmit={appLogin}>
             <div className="AppOB1-email form-item">
-              <label for="username" className="form-label">
+              <label for="email" className="form-label">
                 Your email
               </label>
               <input
-                type="text"
+                type="email"
                 className="form-control"
-                id="text"
+                id="email"
                 placeholder="Enter your email"
                 onChange={handleEmail}
                 aria-describedby="emailHelp"
@@ -95,7 +96,7 @@ function AppLogin() {
             </div>
             <div className="create-account">
               <button type="submit" className="btn fw-bold createButton">
-                Create Account
+                Log In
               </button>
             </div>
           </form>
