@@ -4,7 +4,7 @@ import './AppRegister.css'
 import { useNavigate } from "react-router-dom";
 import { useState , useEffect} from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { useSignupState } from '../../context/SignUpProvider';
+// import { useSignupState } from '../../context/SignUpProvider';
 import dragon from '../../components/images/dragon.png'
 
 const registerURL = process.env.REACT_APP_REGISTER_URL
@@ -16,25 +16,25 @@ function AppRegister() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setpassword2] = useState("");
-  const [signupState, setSignupState] = useSignupState();
+  // const [signupState, setSignupState] = useSignupState();
 
-  useEffect(() => {
-    console.log(JSON.stringify(signupState));
-  }, [signupState]);
+  // useEffect(() => {
+  //   console.log(JSON.stringify(signupState));
+  // }, [signupState]);
 
   const appSignup = async (e) => {
     //REMOVE AFTER TESTING IS FINISHED
     e.preventDefault();
-   await setSignupState({ ...signupState, username, email, password });
+  //  await setSignupState({ ...signupState, username, email, password });
     const requestConfig = {
       headers: { 'Content-Type': 'application/json',
       'x-api-key': 'eddiDzFpPE96dk5VsqKKb7IUVhyLDx9FaBMdiatz' },
     }
 
     const requestBody = {
-      username: signupState.username,
-      email: signupState.email,
-      password: signupState.password
+      username: username,
+      email: email,
+      password: password
     }
 
     await axios

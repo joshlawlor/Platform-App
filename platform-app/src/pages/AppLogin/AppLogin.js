@@ -13,11 +13,11 @@ function AppLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [requestBody, setRequestBody] = useState({});
+  // const [requestBody, setRequestBody] = useState({});
 
-  useEffect(() => {
-    console.log(requestBody);
-  }, [requestBody]);
+  // useEffect(() => {
+  //   console.log(requestBody);
+  // }, [requestBody]);
 
   const requestConfig = {
     headers: { 'Content-Type': 'application/json',
@@ -27,7 +27,11 @@ function AppLogin() {
 
   const appLogin = async(e) => {
     e.preventDefault();
-    await setRequestBody({ email, password })
+    // await setRequestBody({...requestBody, email, password })
+    const requestBody = {
+      email: email,
+      password: password
+    }
 
     axios.post(loginURL, requestBody, requestConfig)
     .then((response) => {
