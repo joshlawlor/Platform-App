@@ -1,9 +1,13 @@
 import React from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useState , useEffect} from 'react';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
-import dragon from '../../components/images/dragon.png'
-import './AppLogin.css'
+import { useState, useEffect } from "react";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import dragon from "../../components/images/dragon.png";
+import "./AppLogin.css";
+
+const loginURL = process.env.REACT_APP_LOGIN_URL
+
 
 function AppLogin() {
   const navigate = useNavigate();
@@ -11,11 +15,26 @@ function AppLogin() {
   const [password, setPassword] = useState("");
   const [requestBody, setRequestBody] = useState({});
 
+  useEffect(() => {
+    console.log(requestBody);
+  }, [requestBody]);
 
-  const appLogin = (e) => {
-    setRequestBody({...requestBody, email, password})
+  const requestConfig = {
+    headers: { 'Content-Type': 'application/json',
+    'x-api-key': 'eddiDzFpPE96dk5VsqKKb7IUVhyLDx9FaBMdiatz' },
   }
-  
+
+
+  const appLogin = async(e) => {
+    e.preventDefault();
+    await setRequestBody({ email, password })
+
+    axios.post(loginURL, requestBody, requestConfig)
+    .then((response) => {
+      console.log(response)
+    })
+  };
+
   let handleEmail = async (e) => {
     await setEmail(e.target.value);
   };
@@ -27,10 +46,10 @@ function AppLogin() {
   return (
     <div className="AppOB1-container">
       <div className="back-container">
-        <button className="aob1-back-btn" onClick={() => navigate('/')}>
+        <button className="aob1-back-btn" onClick={() => navigate("/")}>
           <AiOutlineArrowLeft className="back-arrow" /> <p>Back</p>
         </button>
-      </div>        
+      </div>
       <div className="logo-container">
         <img className="Logo" src={dragon} alt="Logo" />
       </div>
@@ -41,17 +60,17 @@ function AppLogin() {
         <div className="form-container">
           <form className="AppOB1-form" onSubmit={appLogin}>
             <div className="AppOB1-email form-item">
-              <label for="email" className="form-label">
+              <label for="username" className="form-label">
                 Your email
               </label>
               <input
-                type="email"
+                type="text"
                 className="form-control"
-                id="email"
+                id="text"
                 placeholder="Enter your email"
                 onChange={handleEmail}
                 aria-describedby="emailHelp"
-                required
+                
               />
             </div>
             <div className="AppLogin-password relative">
