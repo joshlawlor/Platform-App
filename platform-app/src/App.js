@@ -4,6 +4,7 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import "./App.css";
 
 //PAGES IMPORTS
+import AppLanding from "./pages/AppLanding/AppLanding";
 import AppHome from "./pages/AppHome/AppHome";
 import AppLogin from "./pages/AppLogin/AppLogin";
 import AppRegister from "./pages/AppRegister/AppRegister";
@@ -21,7 +22,8 @@ function App() {
     <BrowserRouter>
       <SignUpProvider>
         <Routes>
-          <Route path="/" element={<AppHome />} />
+          <Route path="/" element={<AppLanding />} />
+          <Route path="/home" element={<AppHome />} />
           <Route path="/login" element={<AppLogin />} />
           <Route path="/register" element={<AppRegister />} />
         </Routes>

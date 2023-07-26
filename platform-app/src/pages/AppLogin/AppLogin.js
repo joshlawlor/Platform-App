@@ -40,6 +40,7 @@ function AppLogin() {
       setUserSession(response.data.user, response.data.token);
       window.alert('Login successful', response.data.message);
       console.log(response)
+      navigate('/home')
     })   
   };
 
