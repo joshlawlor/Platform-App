@@ -37,10 +37,15 @@ function AppLogin() {
 
     axios.post(loginURL, requestBody, requestConfig)
     .then((response) => {
-      setUserSession(response.data.user, response.data.token);
-      window.alert('Login successful', response.data.message);
-      console.log(response)
-      navigate('/home')
+      if(response.data.message){
+        window.alert(`Login Failed: ${response.data.message}`)
+      }else{
+        setUserSession(response.data.user, response.data.token);
+        window.alert(`Login Success, Welcome ${response.data.user.email}`);
+        console.log(response)
+        navigate('/home')
+      }
+      
     })   
   };
 
