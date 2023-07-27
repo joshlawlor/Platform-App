@@ -1,21 +1,54 @@
 import React from "react";
+import axios from "axios";
+import { setUserSession } from "../../service/AuthService";
 import { useNavigate } from "react-router-dom";
-import { useState , useEffect} from 'react';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
-import dragon from '../../components/images/dragon.png'
-import './AppLogin.css'
+import { useState, useEffect } from "react";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import dragon from "../../components/images/dragon.png";
+import "./AppLogin.css";
+
+//ENV VARIABLES
+const loginURL = process.env.REACT_APP_LOGIN_URL
+const apiKey = process.env.REACT_APP_API_KEY  
 
 function AppLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [requestBody, setRequestBody] = useState({});
+  // const [requestBody, setRequestBody] = useState({});
 
+  // useEffect(() => {
+  //   console.log(requestBody);
+  // }, [requestBody]);
 
-  const appLogin = (e) => {
-    setRequestBody({...requestBody, email, password})
+  const requestConfig = {
+    headers: { 'Content-Type': 'application/json',
+    'x-api-key': apiKey },
   }
-  
+
+
+  const appLogin = async(e) => {
+    e.preventDefault();
+    // await setRequestBody({...requestBody, email, password })
+    const requestBody = {
+      email: email,
+      password: password
+    }
+
+    axios.post(loginURL, requestBody, requestConfig)
+    .then((response) => {
+      if(response.data.message){
+        window.alert(`Login Failed: ${response.data.message}`)
+      }else{
+        setUserSession(response.data.user, response.data.token);
+        window.alert(`Login Success, Welcome ${response.data.user.email}`);
+        console.log(response)
+        navigate('/home')
+      }
+      
+    })   
+  };
+
   let handleEmail = async (e) => {
     await setEmail(e.target.value);
   };
@@ -27,10 +60,10 @@ function AppLogin() {
   return (
     <div className="AppOB1-container">
       <div className="back-container">
-        <button className="aob1-back-btn" onClick={() => navigate('/')}>
+        <button className="aob1-back-btn" onClick={() => navigate("/")}>
           <AiOutlineArrowLeft className="back-arrow" /> <p>Back</p>
         </button>
-      </div>        
+      </div>
       <div className="logo-container">
         <img className="Logo" src={dragon} alt="Logo" />
       </div>
@@ -51,7 +84,7 @@ function AppLogin() {
                 placeholder="Enter your email"
                 onChange={handleEmail}
                 aria-describedby="emailHelp"
-                required
+                
               />
             </div>
             <div className="AppLogin-password relative">
@@ -72,7 +105,7 @@ function AppLogin() {
             </div>
             <div className="create-account">
               <button type="submit" className="btn fw-bold createButton">
-                Create Account
+                Log In
               </button>
             </div>
           </form>

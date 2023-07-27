@@ -1,25 +1,55 @@
 import React from "react";
+import axios from "axios";
 import './AppRegister.css'
 import { useNavigate } from "react-router-dom";
 import { useState , useEffect} from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { useSignupState } from '../../context/SignUpProvider';
+// import { useSignupState } from '../../context/SignUpProvider';
 import dragon from '../../components/images/dragon.png'
+
+//ENV VARIABLES
+const registerURL = process.env.REACT_APP_REGISTER_URL
+const apiKey = process.env.REACT_APP_API_KEY  
+
+
 function AppRegister() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setpassword2] = useState("");
-  const [signupState, setSignupState] = useSignupState();
+  // const [signupState, setSignupState] = useSignupState();
 
-  useEffect(() => {
-    console.log(JSON.stringify(signupState));
-  }, [signupState]);
+  // useEffect(() => {
+  //   console.log(JSON.stringify(signupState));
+  // }, [signupState]);
 
   const appSignup = async (e) => {
     //REMOVE AFTER TESTING IS FINISHED
-    // e.preventDefault();
+    e.preventDefault();
+  //  await setSignupState({ ...signupState, username, email, password });
+    const requestConfig = {
+      headers: { 'Content-Type': 'application/json',
+      'x-api-key': apiKey },
+    }
+
+    const requestBody = {
+      username: username,
+      email: email,
+      password: password
+    }
+
+    await axios
+    .post(registerURL, requestBody, requestConfig)
+    .then((response) => {
+      console.log('Success', response);
+      navigate('/');
+    })
+    .catch((error) => {
+      console.log('AXIOS ERROR', error);
+    });
+
 
     // if (password !== password2) {
     //   await setNotificationState({
@@ -29,12 +59,16 @@ function AppRegister() {
     //   });
     //   return;
     // }
-    setSignupState({ ...signupState, email, password });
+    
   };
 
   let handleEmail = async (e) => {
     await setEmail(e.target.value);
   };
+  let handleUsername = async (e) => {
+    await setUsername(e.target.value);
+  };
+
 
   let handlePassword = async (e) => {
     await setPassword(e.target.value);
@@ -59,6 +93,20 @@ function AppRegister() {
           </header>
           <div className="form-container">
             <form className="AppOB1-form" onSubmit={appSignup}>
+              <div className="AppOB1-email form-item">
+                <label for="email" className="form-label">
+                  Your username
+                </label>
+                <input
+                  type="username"
+                  className="form-control"
+                  id="username"
+                  placeholder="Enter your username"
+                  onChange={handleUsername}
+                  aria-describedby="emailHelp"
+                  required
+                />
+              </div>
               <div className="AppOB1-email form-item">
                 <label for="email" className="form-label">
                   Your email
