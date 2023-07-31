@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 function AppHome() {
   const navigate = useNavigate();
+
+  console.log(sessionStorage.user)
+
   return (
     <div className="App">
       <Navbar />
 
       <header className="App-header">
-        <h1 className="homeTitle">Dungeons & Dummies</h1>
         <br />
       </header>
       <div></div>

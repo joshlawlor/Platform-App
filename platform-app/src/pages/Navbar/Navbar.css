@@ -5,10 +5,13 @@
     position: top;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 98.3%;
     height: 73.9px;
     padding: 0 20px;
-    z-index: 1;
-    background: #fff;
-    box-shadow: 4.61867px 0px 18.4747px rgba(45, 131, 174, 0.1);
+    background:  rgb(236, 50, 50);
+}
+
+.navTitle{
+    color: #f3d571;
+    font-size: calc(10px + 5vmin);
 }
