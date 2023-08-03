@@ -32,6 +32,10 @@ function AppRegister() {
       setErrorMessage('All fields are required');
       return;
     }
+    if(password !== password2){
+      setErrorMessage('Passwords must match');
+      return;
+    }
     setErrorMessage(null)
     const requestConfig = {
       headers: { 'Content-Type': 'application/json',
@@ -48,9 +52,15 @@ function AppRegister() {
     .post(registerURL, requestBody, requestConfig)
     .then((response) => {
       console.log('Success', response);
-      navigate('/');
+      setErrorMessage('Registration successful');
+      navigate('/login');
     })
     .catch((error) => {
+      if(error.response.status === 401){
+        setErrorMessage(error.response.data.message);
+      }else{
+        setErrorMessage('Sorry, the server is experiencing difficulty. Please try again');
+      }
       console.log('AXIOS ERROR', error);
     });
 
@@ -163,7 +173,7 @@ function AppRegister() {
                 </button>
               </div>
             </form>
-            {errorMessage && <p>{errorMessage}</p>}
+            {errorMessage && <p className="errorMessage">{errorMessage}</p>}
           </div>
           <div className="login">
             <p className="login-text">
