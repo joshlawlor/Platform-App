@@ -143,3 +143,10 @@
     font-size: 16px;
     padding-left: 3px;
   }
+
+  .errorMessage{
+    color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
