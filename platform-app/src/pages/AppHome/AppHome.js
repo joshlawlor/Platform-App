@@ -6,11 +6,17 @@ function AppHome(){
   console.log(user);
   const name = user.username !== 'undefined' && user ? user.username : '';
   const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    resetUserSession();
+    navigate('/login')
+  }
     return(
         <div className="App">
         <header className="App-header">
         <h1 className='homeTitle'>Welcome {name}</h1>
         <br/>
+        <button onClick={logoutHandler}>LOGOUT</button>
         </header>
         <div>
    
