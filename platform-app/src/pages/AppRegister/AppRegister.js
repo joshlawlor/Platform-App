@@ -19,6 +19,7 @@ function AppRegister() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setpassword2] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
   // const [signupState, setSignupState] = useSignupState();
 
   // useEffect(() => {
@@ -26,9 +27,12 @@ function AppRegister() {
   // }, [signupState]);
 
   const appSignup = async (e) => {
-    //REMOVE AFTER TESTING IS FINISHED
     e.preventDefault();
-  //  await setSignupState({ ...signupState, username, email, password });
+    if(username.trim() === '' || email.trim() === '' || password.trim() === '' || password2.trim() === ''){
+      setErrorMessage('All fields are required');
+      return;
+    }
+    setErrorMessage(null)
     const requestConfig = {
       headers: { 'Content-Type': 'application/json',
       'x-api-key': apiKey },
@@ -159,6 +163,7 @@ function AppRegister() {
                 </button>
               </div>
             </form>
+            {errorMessage && <p>{errorMessage}</p>}
           </div>
           <div className="login">
             <p className="login-text">
