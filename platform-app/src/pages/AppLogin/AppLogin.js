@@ -15,6 +15,7 @@ function AppLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
   // const [requestBody, setRequestBody] = useState({});
 
   // useEffect(() => {
@@ -29,7 +30,12 @@ function AppLogin() {
 
   const appLogin = async(e) => {
     e.preventDefault();
-    // await setRequestBody({...requestBody, email, password })
+    if(email.trim() === '' || password.trim() === ''){
+      setErrorMessage('Both email and password fields are required!')
+      return;
+    }
+    setErrorMessage(null)
+
     const requestBody = {
       email: email,
       password: password
@@ -109,6 +115,7 @@ function AppLogin() {
               </button>
             </div>
           </form>
+          {errorMessage && <p>{errorMessage}</p>}
         </div>
         <div className="login">
           <p className="login-text">
