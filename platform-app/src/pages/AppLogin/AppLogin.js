@@ -15,6 +15,7 @@ function AppLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
   // const [requestBody, setRequestBody] = useState({});
 
   // useEffect(() => {
@@ -29,7 +30,12 @@ function AppLogin() {
 
   const appLogin = async(e) => {
     e.preventDefault();
-    // await setRequestBody({...requestBody, email, password })
+    if(email.trim() === '' || password.trim() === ''){
+      setErrorMessage('Both email and password fields are required!')
+      return;
+    }
+    setErrorMessage(null)
+
     const requestBody = {
       email: email,
       password: password
@@ -38,10 +44,10 @@ function AppLogin() {
     axios.post(loginURL, requestBody, requestConfig)
     .then((response) => {
       if(response.data.message){
-        window.alert(`Login Failed: ${response.data.message}`)
+        setErrorMessage(`Login Failed: ${response.data.message}`)
       }else{
         setUserSession(response.data.user, response.data.token);
-        window.alert(`Login Success, Welcome ${response.data.user.email}`);
+        setErrorMessage(`Login Success, Welcome ${response.data.user.username}`);
         console.log(response)
         navigate('/home')
       }
@@ -109,6 +115,7 @@ function AppLogin() {
               </button>
             </div>
           </form>
+          {errorMessage && <p className="errorMessage">{errorMessage}</p>}
         </div>
         <div className="login">
           <p className="login-text">

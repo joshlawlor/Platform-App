@@ -251,51 +251,9 @@
   .AppOB1-form {
     position: relative;
   }
-  
-  /* .toggleOpen {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    background: url(../../assets/eyeOpen.svg) no-repeat center / cover;
-    cursor: pointer;
-    opacity: 40%;
-  }
-  
-  .toggleClose {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    background: url(../../assets/eyeClose.svg) no-repeat center / cover;
-    cursor: pointer;
-    opacity: 40%;
-  }
-  
-  .toggleOpen2 {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    background: url(../../assets/eyeOpen.svg) no-repeat center / cover;
-    cursor: pointer;
-    opacity: 40%;
-  }
-  
-  .toggleClose2 {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    background: url(../../assets/eyeClose.svg) no-repeat center / cover;
-    cursor: pointer;
-    opacity: 40%;
-  } */
+ .errorMessage{
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
