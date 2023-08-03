@@ -1,23 +1,18 @@
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import {getUser, resetUserSession} from '../../service/AuthService';
+import { getUser, resetUserSession } from "../../service/AuthService";
 import Navbar from "../Navbar/Navbar";
 function AppHome() {
-const user = getUser();
+  const user = getUser();
   console.log(user);
-  const name = user.username !== 'undefined' && user ? user.username : '';
+  const name = user.username !== "undefined" && user ? user.username : "";
   const navigate = useNavigate();
 
-  console.log(sessionStorage.user)
- const logoutHandler = () => {
-    resetUserSession();
-    navigate('/login')
-  }
+  console.log(sessionStorage.user);
+
   return (
     <div className="App">
       <Navbar />
-<button onClick={logoutHandler}>LOGOUT</button>
       <header className="App-header">
         <h1>Welcome {name}</h1>
         <br />
@@ -25,7 +20,6 @@ const user = getUser();
       <div></div>
     </div>
   );
-
 }
 
 export default AppHome;
