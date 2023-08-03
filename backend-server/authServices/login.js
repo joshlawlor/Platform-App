@@ -40,6 +40,7 @@ const login = async (user) => {
   //Grabbing user data from database
   const userInfo = {
     email: dynamoUser.email,
+    username: dynamoUser.username
   };
   const token = auth.generateToken(userInfo);
   const response = {

@@ -1,0 +1,17 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: top;
+    bottom: 0;
+    left: 0;
+    width: 98.3%;
+    height: 73.9px;
+    padding: 0 20px;
+    background:  rgb(236, 50, 50);
+}
+
+.navTitle{
+    color: #f3d571;
+    font-size: calc(10px + 5vmin);
+}
