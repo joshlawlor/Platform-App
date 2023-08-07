@@ -35,12 +35,12 @@ function AppHome() {
 
           <div className="castle-wall">
 
-            {/* <div className="forum-container">
+            <div className="forum-container">
               <div className="forum-header">
                 <h2>Make a Post</h2>
               </div>
             </div>
-             */}
+            
           </div>
         </div>
       </header>

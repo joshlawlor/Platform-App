@@ -21,11 +21,13 @@
 .castle-wall{
     /* border: 3px solid blue; */
     background-color: gray !important;
-    min-width: 100vw;
+    min-width: 99.1vw;
     min-height: 90vh;
     background-image: url('../../components/images/stone.avif');
     background-repeat:  repeat;
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 .rampart-container{
@@ -50,6 +52,7 @@
     max-width: 85vw;
     max-height: 100vh;
     min-height: 70vh;
+    margin-top: 3%;
 }
 
 .forum-header{
