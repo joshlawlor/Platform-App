@@ -1,5 +1,9 @@
 .AppHome{
     font-family: 'GothicFont';
+    /* min-width: 100vw; */
+    /* border: 3px solid green; */
+    min-width: 99.9vw;
+
 }
 
 .home-title{
@@ -12,17 +16,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 
 .castle-wall-container{
-    /* border: 3px solid green; */
+    justify-content: flex-end;
 }
 
 .castle-wall{
     /* border: 3px solid blue; */
     background-color: gray !important;
-    min-width: 99.1vw;
-    min-height: 90vh;
+    min-width: 100vw;
+    height: 75.5vh;
     background-image: url('../../components/images/stone.avif');
     background-repeat:  repeat;
     position: relative;
@@ -41,7 +46,8 @@
     border-radius: 10px;
     background-image: url('../../components/images/stone.avif');
     min-height: 75px;
-    width: 300px;
+    max-width: 300px;
+    min-width: 175px;
     margin-bottom: -20px;
     position: relative;
 }
@@ -51,7 +57,7 @@
     min-width: 80vw;
     max-width: 85vw;
     max-height: 100vh;
-    min-height: 70vh;
+    min-height: 50vh;
     margin-top: 3%;
 }
 

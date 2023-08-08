@@ -5,9 +5,9 @@
   position: top;
   bottom: 0;
   left: 0;
-  width: 98.31%;
+  min-width: 100vw;
   height: 73.9px;
-  padding: 0 20px;
+  /* padding: 0 10px; */
   background: rgb(236, 50, 50);
 }
 
