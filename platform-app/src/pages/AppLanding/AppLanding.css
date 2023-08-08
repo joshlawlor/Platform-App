@@ -1,5 +1,5 @@
-.App {
-  background-color: #f3d571;
+.App-Landing {
+  background-color: transparent ;
   /* border: 3px solid black; */
   min-height: 99.6vh;
   display: flex;
@@ -9,6 +9,8 @@
   font-size: calc(10px + 2vmin);
   color: rgb(236, 50, 50);
   font-family: "GothicFont", sans-serif;
+  overflow: hidden;
+  position: relative;
 }
 
 .homeTitle {
@@ -46,5 +48,31 @@
   max-width: 300px;
   min-width: 175px;
   margin-bottom: -20px;
-  position: relative;
+  /* position: relative; */
+}
+
+
+
+.animatedBackground {
+  position: absolute;
+  z-index: -100;
+  width: 30000%;
+  height: 100%;
+  background: url('/src/components/images/clouds.jpg');
+  background-repeat: repeat-x;
+  background-position: 0;
+  background-size: auto 100%;
+  animation: clouds 10000s linear infinite 1ms;
+  
+}
+
+@keyframes clouds {
+    0%, 
+    100% {
+      transform: translate(0%);
+    }
+    100% {
+      transform: translate(-50%);
+    }
+
 }

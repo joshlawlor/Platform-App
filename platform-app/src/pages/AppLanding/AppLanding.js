@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function AppLanding() {
   const navigate = useNavigate();
   return (
-    <div className="App">
+    <div className="App-Landing">
       <header className="App-header">
         <h1 className="homeTitle">Dungeons & Dummies</h1>
       </header>
@@ -26,6 +26,7 @@ function AppLanding() {
           </div>
         </div>
       </div>
+      <div className="animatedBackground"></div>
     </div>
   );
 }
