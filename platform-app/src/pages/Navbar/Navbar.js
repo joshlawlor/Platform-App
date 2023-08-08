@@ -8,7 +8,7 @@ export default function Navbar() {
   const user = getUser();
   const logoutHandler = () => {
     resetUserSession();
-    navigate("/login");
+    navigate("/");
   };
   return (
     <div className="navbar">

@@ -20,9 +20,13 @@ function AppLanding() {
         </div>
         <div className="landing-castle-wall">
           {/* <img src={dagger} className="App-logo" alt="logo" /> */}
-          <div>
-            <button onClick={() => navigate("/login")}>Login</button>
+          <div className="gate-container">
+          <button onClick={() => navigate("/login")}>Login</button>
+            <div className="gate-image">
+            
             <button onClick={() => navigate("/register")}>Sign Up</button>
+            </div>
+            
           </div>
         </div>
       </div>
