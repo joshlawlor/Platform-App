@@ -1,11 +1,12 @@
 import React from 'react';
-
+import Navbar from '../Navbar/Navbar';
 
 function ChatPage() {
 
     return (
         <div className='chat-page-container'>
-            <h1>Hello</h1>
+            <Navbar></Navbar>
+            <div className='chat-page-header'>CHAT HERE</div>
 
 
         </div>
