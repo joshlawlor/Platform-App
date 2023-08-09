@@ -8,6 +8,8 @@ function AppLanding() {
   return (
     <div className="App-Landing">
       <header className="App-header">
+        {/* <img src={dagger} className="App-logo" alt="logo" /> */}
+
         <h1 className="homeTitle">Dungeons & Dummies</h1>
       </header>
       <div className="landing-castle-wall-container">
@@ -19,14 +21,14 @@ function AppLanding() {
           <div className="landing-rampart"></div>
         </div>
         <div className="landing-castle-wall">
-          {/* <img src={dagger} className="App-logo" alt="logo" /> */}
+          <div className="left-Gate">
+            <button onClick={() => navigate("/login")}>Login</button>
+          </div>
           <div className="gate-container">
-          <button onClick={() => navigate("/login")}>Login</button>
-            <div className="gate-image">
-            
+            <div className="gate-image"></div>
+          </div>
+          <div className="right-Gate">
             <button onClick={() => navigate("/register")}>Sign Up</button>
-            </div>
-            
           </div>
         </div>
       </div>

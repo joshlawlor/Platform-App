@@ -13,16 +13,22 @@
   position: relative;
 }
 
+.App-header{
+
+}
+
 .homeTitle {
   font-size: calc(150px + 2vmin);
+  text-shadow: 5px 8px #f3d571;
 }
+
 
 .landing-castle-wall-container {
   justify-content: flex-end;
 }
 
 .landing-castle-wall {
-  /* border: 3px solid blue; */
+  border: 3px solid blue;
   background-color: gray !important;
   min-width: 100vw;
   height: 57.65vh;
@@ -30,29 +36,38 @@
   background-repeat: repeat;
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
 }
 
+.left-Gate{
+  border: 3px solid yellow !important;
+  min-height: max-content; 
+
+}
 
 
-
+/* START HERE */
 .gate-container {
   display: flex;
   justify-content: center;
-  
   border: 3px solid white;
 
-  height: 40vh; 
+  min-height: max-content; 
 }
 
 .gate-image{
   margin: 190px;
-  border: 3px solid white;
+  /* border: 3px solid white; */
   width: 15vw;
   height: 40vh;
   background: url('/src/components/images/GATE.png');
   background-repeat: no-repeat;
+}
+
+.right-Gate{
+  border: 3px solid green !important;
+  min-height: max-content; 
 }
 
 .landing-rampart-container {
