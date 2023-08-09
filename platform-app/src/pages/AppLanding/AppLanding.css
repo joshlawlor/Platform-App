@@ -60,19 +60,27 @@
 /* START HERE */
 .gate-container {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  border: 3px solid white;
+  align-items: center;
+  /* border: 3px solid purple; */
   min-width: 50vw;
   min-height: max-content; 
 }
 
-.gate-image{
-  margin: 190px;
+.gate-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   /* border: 3px solid white; */
-  width: 15vw;
+  width: fit-content;
   height: 40vh;
-  background: url('/src/components/images/GATE.png');
-  background-repeat: no-repeat;
+  margin-top: 160px;
+}
+
+.gate-image{
+  height: 60vh;
+  margin-bottom: 10px;
 }
 
 .right-Gate{

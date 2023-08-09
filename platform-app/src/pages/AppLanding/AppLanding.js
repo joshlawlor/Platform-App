@@ -2,6 +2,7 @@ import React from "react";
 import "./AppLanding.css";
 import dagger from "../../components/images/dagger.png";
 import BANNER from "../../components/images/BANNER.png";
+import GATE from '../../components/images/GATE.png';
 import { useNavigate } from "react-router-dom";
 
 function AppLanding() {
@@ -35,7 +36,9 @@ function AppLanding() {
             </div>
           </div>
           <div className="gate-container">
-            <div className="gate-image"></div>
+            <div className="gate-div">
+              <img className="gate-image" src={GATE}></img>
+            </div>
           </div>
           <div className="right-Gate">
             <div className="right-Banner">
