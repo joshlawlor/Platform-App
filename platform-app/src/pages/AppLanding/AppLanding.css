@@ -28,7 +28,7 @@
 }
 
 .landing-castle-wall {
-  border: 3px solid blue;
+  /* border: 3px solid blue; */
   background-color: gray !important;
   min-width: 100vw;
   height: 57.65vh;
@@ -41,10 +41,20 @@
 }
 
 .left-Gate{
-  border: 3px solid yellow !important;
   min-height: max-content; 
+  min-width: 25vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
 }
+
+.left-Banner{
+  height: 55vh;
+
+}
+
 
 
 /* START HERE */
@@ -52,7 +62,7 @@
   display: flex;
   justify-content: center;
   border: 3px solid white;
-
+  min-width: 50vw;
   min-height: max-content; 
 }
 
@@ -66,8 +76,44 @@
 }
 
 .right-Gate{
-  border: 3px solid green !important;
+  /* border: 3px solid purple !important; */
   min-height: max-content; 
+  min-width: 25vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-Banner{
+  /* border: 3px solid green !important; */
+  /* min-width: 25vw; */
+  height: 55vh;
+}
+.banner-image{
+  /* border: 3px solid black; */
+  /* margin-bottom: 100px; */
+  position: relative;
+  text-align: center;
+}
+
+.banner-image:hover{
+  cursor: pointer;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.banner-Text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #f3d571 !important;
 }
 
 .landing-rampart-container {

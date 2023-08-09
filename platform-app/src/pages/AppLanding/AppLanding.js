@@ -1,6 +1,7 @@
 import React from "react";
 import "./AppLanding.css";
 import dagger from "../../components/images/dagger.png";
+import BANNER from "../../components/images/BANNER.png";
 import { useNavigate } from "react-router-dom";
 
 function AppLanding() {
@@ -22,13 +23,31 @@ function AppLanding() {
         </div>
         <div className="landing-castle-wall">
           <div className="left-Gate">
-            <button onClick={() => navigate("/login")}>Login</button>
+            <div className="left-Banner">
+              <div className="banner-image">
+              <img
+                  className="center"
+                  onClick={() => navigate("/register")}
+                  src={BANNER}
+                ></img>
+                <div class="banner-Text">SIGN UP</div>
+              </div>
+            </div>
           </div>
           <div className="gate-container">
             <div className="gate-image"></div>
           </div>
           <div className="right-Gate">
-            <button onClick={() => navigate("/register")}>Sign Up</button>
+            <div className="right-Banner">
+              <div className="banner-image">
+                <img
+                  className="center"
+                  onClick={() => navigate("/login")}
+                  src={BANNER}
+                ></img>
+                <div class="banner-Text">LOG IN</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
