@@ -18,31 +18,9 @@ function AppHome() {
       <header className="App-header">
         <h1 className="home-title">Welcome {name}</h1>
         <div className="castle-wall-container">
-          <div className="rampart-container">
-            <div className="rampart">
-            </div>
-            <div className="rampart">
-            </div>
-            <div className="rampart">
-            </div>
-            <div className="rampart">
-            </div>
-            <div className="rampart">
-            </div>
-            {/* <div className="rampart">
-            </div> */}
-          </div>
-
-          <div className="castle-wall">
-
-            <div className="forum-container">
-              <div className="forum-header">
-                <h2>Make a Post</h2>
-              </div>
-            </div>
+          
             
           </div>
-        </div>
       </header>
     </div>
   );
