@@ -1,17 +1,166 @@
-.App {
-    background-color: #f3d571;
-    border: 3px solid black;
-    min-height: 99.6vh;
-    display: flex;
-    font-size: larger;
-    flex-direction: column;
-    align-items: center;
-    font-size: calc(10px + 2vmin);
-    color: rgb(236, 50, 50);
-    font-family: 'GothicFont', sans-serif;
-  }
+.App-Landing {
+  background-color: transparent ;
+  /* border: 3px solid black; */
+  min-height: 100vh;
+  display: flex;
+  font-size: larger;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(236, 50, 50);
+  font-family: "GothicFont", sans-serif;
+  overflow: hidden;
+  position: relative;
+}
 
 
-  .homeTitle {
-    font-size: calc(150px + 2vmin);
-  }
+
+.homeTitle {
+  font-size: calc(150px + 2vmin);
+  text-shadow: 5px 8px #f3d571;
+}
+
+
+.landing-castle-wall-container {
+  justify-content: flex-end;
+}
+
+.landing-castle-wall {
+  /* border: 3px solid blue; */
+  background-color: gray !important;
+  min-width: 100vw;
+  height: 57.65vh;
+  background-image: url("../../components/images/stone.avif");
+  background-repeat: repeat;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.left-Gate{
+  min-height: max-content; 
+  min-width: 25vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.left-Banner{
+  height: 55vh;
+
+}
+
+
+
+/* START HERE */
+.gate-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* border: 3px solid purple; */
+  min-width: 50vw;
+  min-height: max-content; 
+}
+
+.gate-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 3px solid white; */
+  width: fit-content;
+  height: 40vh;
+  margin-top: 160px;
+}
+
+.gate-image{
+  height: 60vh;
+  margin-bottom: 10px;
+}
+
+.right-Gate{
+  /* border: 3px solid purple !important; */
+  min-height: max-content; 
+  min-width: 25vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-Banner{
+  /* border: 3px solid green !important; */
+  /* min-width: 25vw; */
+  height: 55vh;
+}
+.banner-image{
+  /* border: 3px solid black; */
+  /* margin-bottom: 100px; */
+  position: relative;
+  text-align: center;
+}
+
+.banner-image:hover{
+  cursor: pointer;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.banner-Text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #f3d571 !important;
+}
+
+.landing-rampart-container {
+  /* border: 3px solid red; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.landing-rampart {
+  /* border: 3px solid black; */
+  border-radius: 10px;
+  background-image: url("../../components/images/stone.avif");
+  min-height: 75px;
+  max-width: 300px;
+  min-width: 175px;
+  margin-bottom: -20px;
+  /* position: relative; */
+}
+
+
+
+.animatedBackground {
+  position: absolute;
+  z-index: -100;
+  width: 30000%;
+  height: 70%;
+  background: url('/src/components/images/clouds.jpg');
+  background-repeat: repeat-x;
+  background-position: 0;
+  background-size: auto 100%;
+  animation: clouds 10000s linear infinite 1ms;
+  
+}
+
+@keyframes clouds {
+    0%, 
+    100% {
+      transform: translate(0%);
+    }
+    100% {
+      transform: translate(-50%);
+    }
+
+}

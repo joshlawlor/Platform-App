@@ -1,30 +1,29 @@
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import {getUser, resetUserSession} from '../../service/AuthService';
+import { getUser, resetUserSession } from "../../service/AuthService";
 import Navbar from "../Navbar/Navbar";
+import "./AppHome.css";
+import { Card, Container } from "react-bootstrap";
 function AppHome() {
-const user = getUser();
+  const user = getUser();
   console.log(user);
-  const name = user.username !== 'undefined' && user ? user.username : '';
+  const name = user.username !== "undefined" && user ? user.username : "";
   const navigate = useNavigate();
 
-  console.log(sessionStorage.user)
- const logoutHandler = () => {
-    resetUserSession();
-    navigate('/login')
-  }
+  console.log(sessionStorage.user);
+
   return (
-    <div className="App">
+    <div className="AppHome">
       <Navbar />
-<button onClick={logoutHandler}>LOGOUT</button>
       <header className="App-header">
-        <br />
+        <h1 className="home-title">Welcome {name}</h1>
+        <div className="castle-wall-container">
+          
+            
+          </div>
       </header>
-      <div></div>
     </div>
   );
-
 }
 
 export default AppHome;

@@ -1,0 +1,72 @@
+.AppHome{
+    font-family: 'GothicFont';
+    /* min-width: 100vw; */
+    /* border: 3px solid green; */
+    min-width: 99.9vw;
+}
+
+.home-title{
+    font-size: calc(15px + 4vmin);
+    color: rgb(236, 50, 50);
+}
+
+.App-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.castle-wall-container{
+    justify-content: flex-end;
+}
+
+.castle-wall{
+    /* border: 3px solid blue; */
+    background-color: gray !important;
+    min-width: 100vw;
+    height: 75.5vh;
+    background-image: url('../../components/images/stone.avif');
+    background-repeat:  repeat;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.rampart-container{
+    /* border: 3px solid red; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.rampart{
+    /* border: 3px solid black; */
+    border-radius: 10px;
+    background-image: url('../../components/images/stone.avif');
+    min-height: 75px;
+    max-width: 300px;
+    min-width: 175px;
+    margin-bottom: -20px;
+    position: relative;
+}
+
+.forum-container{
+    border: 3px solid red;
+    min-width: 80vw;
+    max-width: 85vw;
+    max-height: 100vh;
+    min-height: 50vh;
+    margin-top: 3%;
+}
+
+.forum-header{
+    border: 3px solid black;
+    background: rgb(236, 50, 50);
+    max-height: 8vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    border-radius: 25px;
+}

@@ -1,17 +1,29 @@
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: top;
-    bottom: 0;
-    left: 0;
-    width: 98.3%;
-    height: 73.9px;
-    padding: 0 20px;
-    background:  rgb(236, 50, 50);
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: top;
+  bottom: 0;
+  left: 0;
+  min-width: 100vw;
+  height: 73.9px;
+  /* padding: 0 10px; */
+  background: rgb(236, 50, 50);
 }
 
-.navTitle{
-    color: #f3d571;
-    font-size: calc(10px + 5vmin);
+.navTitle {
+  color: #f3d571;
+  font-size: calc(10px + 5vmin);
+  font-family: 'GothicFont';
+}
+
+.btn {
+  border: none;
+  font-size: calc(15px + 2vmin);
+  background-color: inherit;
+  padding: 14px 28px;
+  cursor: pointer;
+  display: inline-block;
+  color: #f3d571;
+  font-family: 'GothicFont';
 }
