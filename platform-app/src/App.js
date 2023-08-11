@@ -1,4 +1,7 @@
 import React from "react";
+//AUTH IMPORTS
+import PublicRoute from "./routes/PublicRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 import "./App.css";
@@ -14,6 +17,8 @@ import ChatPage from "./pages/ChatPage/ChatPage";
 import SignUpProvider from "./context/SignUpProvider";
 export const AppContext = React.createContext({});
 
+
+
 function App() {
   const AppContextValue = {};
 
@@ -23,12 +28,12 @@ function App() {
     <BrowserRouter>
       <SignUpProvider>
         <Routes>
-          <Route path="/" element={<AppLanding />} />
-          <Route path="/home" element={<AppHome />} />
-          <Route path="/login" element={<AppLogin />} />
-          <Route path="/register" element={<AppRegister />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/chat" element={<ChatPage />} />
+          <PublicRoute path="/" element={<AppLanding />} />
+          <PrivateRoute path="/home" element={<AppHome />} />
+          <PublicRoute path="/login" element={<AppLogin />} />
+          <PublicRoute path="/register" element={<AppRegister />} />
+          <PublicRoute path="/profile" element={<ProfilePage />} />
+          <PublicRoute path="/chat" element={<ChatPage />} />
         </Routes>
       </SignUpProvider>
     </BrowserRouter>
