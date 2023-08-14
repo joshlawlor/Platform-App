@@ -28,12 +28,12 @@ function App() {
     <BrowserRouter>
       <SignUpProvider>
         <Routes>
-          <PublicRoute path="/" element={<AppLanding />} />
-          <PrivateRoute path="/home" element={<AppHome />} />
-          <PublicRoute path="/login" element={<AppLogin />} />
-          <PublicRoute path="/register" element={<AppRegister />} />
-          <PublicRoute path="/profile" element={<ProfilePage />} />
-          <PublicRoute path="/chat" element={<ChatPage />} />
+          <Route path="/" element={<AppLanding />} />
+          <Route path="/home" element={<AppHome />} />
+          <Route path="/login" element={<AppLogin />} />
+          <Route path="/register" element={<AppRegister />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/chat" element={<ChatPage />} />
         </Routes>
       </SignUpProvider>
     </BrowserRouter>
