@@ -1,5 +1,6 @@
 const registerUser = require("./authServices/register");
 const loginUser = require("./authServices/login");
+const verifyUser = require("./authServices/verification");
 
 const healthPath = "/health";
 const registerPath = "/register";
@@ -33,7 +34,8 @@ exports.handler = async (e) => {
     const loginBody = JSON.parse(e.body);
     return (res = await loginUser.login(loginBody));
   } else if (e.httpMethod === "POST" && e.path === verifyPath) {
-    return response;
+    const verifyBody = JSON.parse(e.body);
+    return (res = await verifyUser.verify(verifyBody));
   } else {
     response = buildResponse(404, "404 Not Found");
   }
