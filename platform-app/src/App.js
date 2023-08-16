@@ -21,7 +21,7 @@ import SignUpProvider from "./context/SignUpProvider";
 export const AppContext = React.createContext({});
 
  
-const verifyTokenAPIURL = "https://iyufswqyje.execute-api.us-east-1.amazonaws.com/Development/verified"
+const verifyTokenAPIURL = process.env.REACT_APP_VERIFY_URL
 const apiKey = process.env.REACT_APP_API_KEY  
 
 function App() {
