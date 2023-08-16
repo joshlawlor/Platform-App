@@ -1,11 +1,11 @@
 const registerUser = require("./authServices/register");
 const loginUser = require("./authServices/login");
-const verifyUser = require("./authServices/verify");
+const verifyUser = require("./authServices/verification");
 
 const healthPath = "/health";
 const registerPath = "/register";
 const loginPath = "/login";
-const verifyPath = "/verify";
+const verifyPath = "/verified";
 
 
 
