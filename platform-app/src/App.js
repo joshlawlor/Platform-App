@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 //AUTH IMPORTS
 // import PublicRoute from "./routes/PublicRoute";
@@ -20,11 +20,13 @@ import ChatPage from "./pages/ChatPage/ChatPage";
 import SignUpProvider from "./context/SignUpProvider";
 export const AppContext = React.createContext({});
 
-
+ 
 const verifyTokenAPIURL = "https://iyufswqyje.execute-api.us-east-1.amazonaws.com/Development/verified"
 const apiKey = process.env.REACT_APP_API_KEY  
 
 function App() {
+
+  const [isAuthenticating, setAuthenticating] = useState(true)
 
   useEffect(() => {
     const token = getToken();
@@ -44,14 +46,21 @@ function App() {
 
     axios.post(verifyTokenAPIURL,requestBody,requestConfig).then(response => {
       setUserSession(response.data.user, response.data.token)
+      setAuthenticating(false)
       console.log('Verified')
     }).catch(() => {
       console.log('Error Validating')
       resetUserSession();
+      setAuthenticating(false)
     })
 
 
   }, [])
+
+  const token = getToken();
+  if(isAuthenticating && token){
+    return <div>Authenticating...</div>
+  }
 
   const AppContextValue = {};
 
