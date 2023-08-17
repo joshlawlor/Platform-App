@@ -1,7 +1,6 @@
 module.exports = {
     getUser: function () {
       const user = sessionStorage.getItem('user');
-      console.log(user);
       try {
         return JSON.parse(user);
       } catch (err) {
