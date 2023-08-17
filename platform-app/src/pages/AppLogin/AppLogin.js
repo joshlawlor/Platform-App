@@ -4,7 +4,7 @@ import { setUserSession } from "../../service/AuthService";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import dragon from "../../components/images/dragon.png";
+import dragon from "../../assets/images/dragon.png";
 import "./AppLogin.css";
 
 //ENV VARIABLES

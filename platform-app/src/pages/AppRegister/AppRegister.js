@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState , useEffect} from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 // import { useSignupState } from '../../context/SignUpProvider';
-import dragon from '../../components/images/dragon.png'
+import dragon from '../../assets/images/dragon.png'
 
 //ENV VARIABLES
 const registerURL = process.env.REACT_APP_REGISTER_URL
