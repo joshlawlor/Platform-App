@@ -24,8 +24,10 @@ function ChatPage() {
     <div className="chat-page">
       <Navbar></Navbar>
       <div className="chat-page-container">
-        <div className="chat-header">CHAT HEADER HERE
-          <button onClick={chatSignIn}>SIGN INTO CHAT</button>
+        <div className="chat-header">
+
+        {chatUser ? `Hello ${chatUser.displayName}` :  <button onClick={chatSignIn}>SIGN INTO CHAT</button>}
+         
         
         </div>
         <div className="chat-content">CHAT CONTENT HERE
