@@ -29,7 +29,7 @@ const Chat = () => {
         ))}
         
         </div>
-        <SendMessage/>
+        <SendMessage scroll={scroll}/>
         {/* Send Message Component */}
         <span ref={scroll}>
 

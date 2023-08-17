@@ -4,7 +4,7 @@ const Message = ({message}) => {
   return (
     <div>
         <div className='message'>
-            <p className='name'>Josh</p>
+            <p className='name'>{message.name}</p>
             <p>{message.text}</p>
         </div>
 

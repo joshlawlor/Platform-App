@@ -30,8 +30,8 @@ function ChatPage() {
          
         
         </div>
-        <div className="chat-content">CHAT CONTENT HERE
-          <Chat/>
+        <div className="chat-content">
+          {chatUser ? <Chat/> : null}
         </div>
       </div>
     </div>
