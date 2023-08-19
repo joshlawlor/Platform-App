@@ -1,8 +1,9 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 import { getUser } from "../../service/AuthService";
+import './ProfilePage.css'
 function ProfilePage() {
-    if(getUser() == undefined){
+    if(getUser() === undefined){
         console.log(getUser())
         console.log('NO USER')
         window.location.replace('/');
@@ -10,9 +11,9 @@ function ProfilePage() {
     const user = getUser();
     const name = user.username;
     return(
-        <div className="profile-container">
+        <div className="profile-page">
             <Navbar></Navbar>
-            <div>
+            <div className="profile-container">
                 <h1>Welcome {name}</h1>
             </div>
 
