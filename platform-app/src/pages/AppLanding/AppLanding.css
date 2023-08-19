@@ -30,7 +30,7 @@
   background-color: gray !important;
   min-width: 100vw;
   height: 57.65vh;
-  background-image: url("../../components/images/stone.avif");
+  background-image: url("../../assets/images/stone.avif");
   background-repeat: repeat;
   position: relative;
   display: flex;
@@ -131,7 +131,7 @@
 .landing-rampart {
   /* border: 3px solid black; */
   border-radius: 10px;
-  background-image: url("../../components/images/stone.avif");
+  background-image: url("../../assets/images/stone.avif");
   min-height: 75px;
   max-width: 300px;
   min-width: 175px;
@@ -146,7 +146,7 @@
   z-index: -100;
   width: 30000%;
   height: 70%;
-  background: url('/src/components/images/clouds.jpg');
+  background: url('/src/assets/images/clouds.jpg');
   background-repeat: repeat-x;
   background-position: 0;
   background-size: auto 100%;

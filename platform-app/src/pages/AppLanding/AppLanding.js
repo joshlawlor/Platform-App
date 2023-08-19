@@ -1,8 +1,8 @@
 import React from "react";
 import "./AppLanding.css";
-import dagger from "../../components/images/dagger.png";
-import BANNER from "../../components/images/BANNER.png";
-import GATE from '../../components/images/GATE.png';
+import dagger from "../../assets/images/dagger.png";
+import BANNER from "../../assets/images/BANNER.png";
+import GATE from '../../assets/images/GATE.png';
 import { useNavigate } from "react-router-dom";
 
 function AppLanding() {

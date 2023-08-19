@@ -2,11 +2,17 @@ import React from "react";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { getUser, resetUserSession } from "../../service/AuthService";
-
+import {auth} from '../../firebase';
 export default function Navbar() {
   const navigate = useNavigate();
   const user = getUser();
+
+  //CHAT LOGOUT
+  const signOut = () => {
+    signOut(auth)
+  }
   const logoutHandler = () => {
+    auth.signOut()
     resetUserSession();
     navigate("/");
   };
