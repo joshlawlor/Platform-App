@@ -1,0 +1,11 @@
+.profile-page {
+  border: 3px solid red;
+  height: 100%;
+  background-repeat: no-repeat;
+  min-height: 99.6vh;
+  max-width: 100vw;
+  background-image: url("../../components/images/throneroom.jpg");
+  background-size: cover;
+  overflow: hidden;
+  /* margin-bottom: 25%; */
+}

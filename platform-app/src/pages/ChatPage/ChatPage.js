@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../Navbar/Navbar";
 import { getUser } from "../../service/AuthService";
 function ChatPage() {
-  if (getUser() == undefined) {
+  if (getUser() === undefined) {
     console.log(getUser());
     console.log("NO USER");
     window.location.replace("/");
