@@ -20,7 +20,13 @@ function ChatPage() {
     signInWithRedirect(auth, provider);
   }
 
+  const style = {
+    chatContainer: `max-w-[728px] mx-auto text-center`,
+    sectionContainer: `flex flex-col h-[90vh] bg-gray-100 mt-10 shadow-xl border relative`,
+  };
+
   return (
+    <div className={style.chatContainer}>
     <div className="chat-page">
       <Navbar></Navbar>
       <div className="chat-page-container">
@@ -34,6 +40,7 @@ function ChatPage() {
           {chatUser ? <Chat/> : null}
         </div>
       </div>
+    </div>
     </div>
   );
 }
