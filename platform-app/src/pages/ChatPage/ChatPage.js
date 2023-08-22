@@ -3,6 +3,7 @@ import './ChatPage.css'
 import Navbar from "../Navbar/Navbar";
 import { getUser } from "../../service/AuthService";
 import Chat from "../../components/Chat";
+import CreateChat from "../../components/CreateChat";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 // import { GoogleAuthProvider , signInWithRedirect} from "firebase/auth";
@@ -25,7 +26,8 @@ function ChatPage() {
       <Navbar></Navbar>
       <div className="chat-page-container">
         <div className="chat-header">
-
+          <CreateChat/>
+    <br/>
         {chatUser ? `Hello ${chatUser.displayName}` :  <button>SIGN INTO CHAT</button>}
          
         
