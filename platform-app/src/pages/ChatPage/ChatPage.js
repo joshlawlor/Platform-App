@@ -8,7 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { GoogleAuthProvider , signInWithRedirect} from "firebase/auth";
 
 function ChatPage() {
-  if (getUser() == undefined) {
+  if (getUser() === undefined) {
     window.location.replace("/");
   }
 

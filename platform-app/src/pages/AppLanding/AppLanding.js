@@ -1,8 +1,7 @@
 import React from "react";
 import "./AppLanding.css";
-import dagger from "../../assets/images/dagger.png";
 import BANNER from "../../assets/images/BANNER.png";
-import GATE from '../../assets/images/GATE.png';
+import GATE from "../../assets/images/GATE.png";
 import { useNavigate } from "react-router-dom";
 
 function AppLanding() {
@@ -26,8 +25,9 @@ function AppLanding() {
           <div className="left-Gate">
             <div className="left-Banner">
               <div className="banner-image">
-              <img
+                <img
                   className="center"
+                  alt="banner"
                   onClick={() => navigate("/register")}
                   src={BANNER}
                 ></img>
@@ -37,13 +37,14 @@ function AppLanding() {
           </div>
           <div className="gate-container">
             <div className="gate-div">
-              <img className="gate-image" src={GATE}></img>
+              <img alt="gate" className="gate-image" src={GATE}></img>
             </div>
           </div>
           <div className="right-Gate">
             <div className="right-Banner">
               <div className="banner-image">
                 <img
+                  alt="banner"
                   className="center"
                   onClick={() => navigate("/login")}
                   src={BANNER}

@@ -2,11 +2,11 @@ import React from "react";
 import axios from "axios";
 import './AppRegister.css'
 import { useNavigate } from "react-router-dom";
-import { useState , useEffect} from 'react';
+import { useState } from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 // import { useSignupState } from '../../context/SignUpProvider';
 import dragon from '../../assets/images/dragon.png'
-
+import {getAuth, createUserWithEmailAndPassword} from '../../firebase'
 //ENV VARIABLES
 const registerURL = process.env.REACT_APP_REGISTER_URL
 const apiKey = process.env.REACT_APP_API_KEY  
@@ -46,6 +46,10 @@ function AppRegister() {
       username: username,
       email: email,
       password: password
+    }
+
+    const chatRegister = () => {
+
     }
 
     await axios
