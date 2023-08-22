@@ -2,14 +2,16 @@ import React from "react";
 import axios from "axios";
 import { setUserSession } from "../../service/AuthService";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import dragon from "../../assets/images/dragon.png";
 import "./AppLogin.css";
+import { auth } from "../../firebase";
+import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 //ENV VARIABLES
-const loginURL = process.env.REACT_APP_LOGIN_URL
-const apiKey = process.env.REACT_APP_API_KEY  
+const loginURL = process.env.REACT_APP_LOGIN_URL;
+const apiKey = process.env.REACT_APP_API_KEY;
 
 function AppLogin() {
   const navigate = useNavigate();
@@ -23,36 +25,46 @@ function AppLogin() {
   // }, [requestBody]);
 
   const requestConfig = {
-    headers: { 'Content-Type': 'application/json',
-    'x-api-key': apiKey },
-  }
+    headers: { "Content-Type": "application/json", "x-api-key": apiKey },
+  };
 
-
-  const appLogin = async(e) => {
+  const appLogin = async (e) => {
     e.preventDefault();
-    if(email.trim() === '' || password.trim() === ''){
-      setErrorMessage('Both email and password fields are required!')
+    if (email.trim() === "" || password.trim() === "") {
+      setErrorMessage("Both email and password fields are required!");
       return;
     }
-    setErrorMessage(null)
+    setErrorMessage(null);
 
     const requestBody = {
       email: email,
-      password: password
-    }
+      password: password,
+    };
 
-    axios.post(loginURL, requestBody, requestConfig)
-    .then((response) => {
-      if(response.data.message){
-        setErrorMessage(`Login Failed: ${response.data.message}`)
-      }else{
+    axios.post(loginURL, requestBody, requestConfig).then((response) => {
+      if (response.data.message) {
+        setErrorMessage(`Login Failed: ${response.data.message}`);
+      } else {
         setUserSession(response.data.user, response.data.token);
-        setErrorMessage(`Login Success, Welcome ${response.data.user.username}`);
-        console.log(response)
-        navigate('/home')
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+          })
+          .then(() => {
+            updateProfile(auth.currentUser, {
+              displayName: response.data.user.username,
+            });
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            console.log(errorMessage);
+          });
+        setErrorMessage(
+          `Login Success, Welcome ${response.data.user.username}`
+        );
+        console.log(response);
+        navigate("/home");
       }
-      
-    })   
+    });
   };
 
   let handleEmail = async (e) => {
@@ -90,7 +102,6 @@ function AppLogin() {
                 placeholder="Enter your email"
                 onChange={handleEmail}
                 aria-describedby="emailHelp"
-                
               />
             </div>
             <div className="AppLogin-password relative">
