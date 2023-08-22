@@ -5,7 +5,7 @@ import { getUser } from "../../service/AuthService";
 import Chat from "../../components/Chat";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { GoogleAuthProvider , signInWithRedirect} from "firebase/auth";
+// import { GoogleAuthProvider , signInWithRedirect} from "firebase/auth";
 
 function ChatPage() {
   if (getUser() === undefined) {
@@ -15,10 +15,10 @@ function ChatPage() {
   const [chatUser] = useAuthState(auth);
   console.log(chatUser);
 
-  const chatSignIn = () => {
-    const provider = new GoogleAuthProvider()
-    signInWithRedirect(auth, provider);
-  }
+  // const chatSignIn = () => {
+  //   const provider = new GoogleAuthProvider()
+  //   signInWithRedirect(auth, provider);
+  // }
 
   return (
     <div className="chat-page">
@@ -26,7 +26,7 @@ function ChatPage() {
       <div className="chat-page-container">
         <div className="chat-header">
 
-        {chatUser ? `Hello ${chatUser.displayName}` :  <button onClick={chatSignIn}>SIGN INTO CHAT</button>}
+        {chatUser ? `Hello ${chatUser.displayName}` :  <button>SIGN INTO CHAT</button>}
          
         
         </div>

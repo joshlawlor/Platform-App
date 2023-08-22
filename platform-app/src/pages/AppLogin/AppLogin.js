@@ -48,7 +48,6 @@ function AppLogin() {
         setUserSession(response.data.user, response.data.token);
         signInWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
-            const chatUser = userCredential.user;
           })
           .then(() => {
             updateProfile(auth.currentUser, {
