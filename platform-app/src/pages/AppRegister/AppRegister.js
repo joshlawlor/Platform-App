@@ -6,7 +6,8 @@ import { useState } from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 // import { useSignupState } from '../../context/SignUpProvider';
 import dragon from '../../assets/images/dragon.png'
-import {getAuth, createUserWithEmailAndPassword} from '../../firebase'
+import {auth} from '../../firebase'
+import {createUserWithEmailAndPassword} from 'firebase/auth'
 //ENV VARIABLES
 const registerURL = process.env.REACT_APP_REGISTER_URL
 const apiKey = process.env.REACT_APP_API_KEY  
@@ -14,7 +15,6 @@ const apiKey = process.env.REACT_APP_API_KEY
 
 function AppRegister() {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -48,15 +48,24 @@ function AppRegister() {
       password: password
     }
 
-    const chatRegister = () => {
-
-    }
+  
 
     await axios
     .post(registerURL, requestBody, requestConfig)
     .then((response) => {
       console.log('Success', response);
       setErrorMessage('Registration successful');
+      
+      createUserWithEmailAndPassword(auth, email, username, password)
+        .then((userCredential) => {
+          setErrorMessage('CHAT SUCCESSFUL');
+          const user = userCredential.user;
+          console.log(user)
+        })
+        .catch((error) => {
+          // const setErrorMessage = (error.code);
+          console.log(error.message);
+        });
       navigate('/login');
     })
     .catch((error) => {
