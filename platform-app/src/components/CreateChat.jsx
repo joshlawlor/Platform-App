@@ -12,31 +12,29 @@ const CreateChat = () => {
         return;
     }
     const {uid, displayName} = auth.currentUser
+    
+    //THIS IS THE ROUTE TO THE CHAT COLLECTION
     const chatCollectionRef = collection(db, 'chats')
 
+    //THIS IS THE ROUTE TO CREATE A DOCUMENT I
     const chatDocRef = doc(chatCollectionRef, input);
 
     await setDoc(chatDocRef, {
-        name: input,
+        name: 'chat name',
         owner: displayName,
         uid,
         timestamp: serverTimestamp()
     });
+
     
-    const messagesSubcollectionRef = collection(db, 'chatmessages');
+    const messagesSubcollectionRef = collection(chatDocRef, 'Messages');
 
     await addDoc(messagesSubcollectionRef, {
         name: 'first chat',
         
     })
-        // await addDoc(collection(db, 'chats'), {
-        //     text: input,
-        //     owner: displayName,
-        //     uid,
-        //     timestamp: serverTimestamp()
-        // })
     setInput('')
-};
+  };
 
   return (
     <form onSubmit={createChat}>
