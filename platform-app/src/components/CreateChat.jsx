@@ -20,7 +20,7 @@ const CreateChat = () => {
     const chatDocRef = doc(chatCollectionRef, input);
 
     await setDoc(chatDocRef, {
-        name: 'chat name',
+        name: input,
         owner: displayName,
         uid,
         timestamp: serverTimestamp()
