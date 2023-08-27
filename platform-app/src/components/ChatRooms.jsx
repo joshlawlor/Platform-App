@@ -19,11 +19,13 @@ export const ChatRooms = () => {
       setRooms(chats);
     });
     return () => unsubscribe();
+    
   }, []);
 
   return (
     <div>
       <CreateChat />
+      <br />
       <div>
         {rooms && rooms.map((room) => <Room key={room.id} room={room} />)}
       </div>

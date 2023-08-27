@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { auth, db } from "../firebase";
-import { addDoc, collection, serverTimestamp, doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp, doc, setDoc, createId } from "firebase/firestore";
 
 const CreateChat = () => {
   const [input, setInput] = useState("");
@@ -17,7 +17,7 @@ const CreateChat = () => {
     const chatCollectionRef = collection(db, 'chats')
 
     //THIS IS THE ROUTE TO CREATE A MESSAGES SUBCOLLECTION INSIDE THE CHAT DOCMENT
-    const chatDocRef = doc(chatCollectionRef, input);
+    const chatDocRef = doc(chatCollectionRef);
 
     await setDoc(chatDocRef, {
         name: input,
