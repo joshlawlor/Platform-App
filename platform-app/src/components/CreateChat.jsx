@@ -16,7 +16,7 @@ const CreateChat = () => {
     //THIS IS THE ROUTE TO THE CHAT COLLECTION
     const chatCollectionRef = collection(db, 'chats')
 
-    //THIS IS THE ROUTE TO CREATE A DOCUMENT I
+    //THIS IS THE ROUTE TO CREATE A MESSAGES SUBCOLLECTION INSIDE THE CHAT DOCMENT
     const chatDocRef = doc(chatCollectionRef, input);
 
     await setDoc(chatDocRef, {
@@ -30,8 +30,8 @@ const CreateChat = () => {
     const messagesSubcollectionRef = collection(chatDocRef, 'Messages');
 
     await addDoc(messagesSubcollectionRef, {
-        name: 'first chat',
-        
+        text: 'Chat Created',
+        timestamp: serverTimestamp()
     })
     setInput('')
   };
