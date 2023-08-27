@@ -9,7 +9,7 @@ export const ChatRooms = () => {
   const scroll = useRef();
 
   useEffect(() => {
-    const q = query(collection(db, "chats"), orderBy("timestamp"));
+    const q = query(collection(db, "chats"), orderBy("timestamp", "desc"));
     console.log(q);
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let chats = [];
