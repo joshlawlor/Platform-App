@@ -10,11 +10,12 @@ import { ChatRooms } from "../../components/ChatRooms";
 // import { GoogleAuthProvider , signInWithRedirect} from "firebase/auth";
 
 function ChatPage() {
-  if (getUser() === undefined) {
+  const [chatUser] = useAuthState(auth);
+
+  if (getUser() === undefined || chatUser === null) {
     window.location.replace("/");
   }
 
-  const [chatUser] = useAuthState(auth);
   console.log(chatUser);
 
   // const chatSignIn = () => {
