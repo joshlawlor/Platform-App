@@ -35,7 +35,7 @@ const Chat = ({roomID, roomName}) => {
         ))}
         
         </div>
-        <SendMessage scroll={scroll}/>
+        <SendMessage scroll={scroll} roomID={roomID}/>
         {/* Send Message Component */}
         <span ref={scroll}>
 
