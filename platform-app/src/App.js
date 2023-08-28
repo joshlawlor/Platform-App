@@ -15,7 +15,7 @@ import AppLogin from "./pages/AppLogin/AppLogin";
 import AppRegister from "./pages/AppRegister/AppRegister";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import ChatPage from "./pages/ChatPage/ChatPage";
-
+import ChatRoom from "./pages/ChatRoom/ChatRoom";
 //CONTEXT IMPORTS
 import SignUpProvider from "./context/SignUpProvider";
 export const AppContext = React.createContext({});
@@ -76,6 +76,7 @@ function App() {
           <Route path="/register" element={<AppRegister />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/chat" element={<ChatPage />} />
+          <Route path='/chat/room' element={<ChatRoom />} />
         </Routes>
       </SignUpProvider>
     </BrowserRouter>
