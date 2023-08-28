@@ -12,7 +12,7 @@ const ChatRoom = () => {
         <Navbar></Navbar>
         <div>
             <h1>CHAT ROOM:{roomName}</h1>
-            <Chat/>
+            <Chat roomName={roomName} roomID={roomID}/>
         </div>
     </div>
   )

@@ -19,7 +19,7 @@ export const ChatRooms = () => {
       setRooms(chats);
     });
     return () => unsubscribe();
-    
+
   }, []);
 
   return (

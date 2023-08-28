@@ -1,15 +1,21 @@
 import React , {useState, useEffect, useRef} from "react";
 import Message from "./Message";
 import {db} from '../firebase';
-import {query,  collection, orderBy, onSnapshot}from 'firebase/firestore'
+import {query, doc, collection, orderBy, onSnapshot}from 'firebase/firestore'
 import SendMessage from "./SendMessage";
 
-const Chat = () => {
+const Chat = ({roomID, roomName}) => {
     const [messages, setMessages] = useState([]);
     const scroll = useRef()
 
     useEffect(() => {
-        const q = query(collection(db, 'messages'), orderBy('timestamp'));
+        //THIS GRABS THE SPECIFIC ROOM DOC FROM THE CHATS COLLECTION
+        const chatRoomRef= doc(collection(db, 'chats'), roomID);
+        //THIS GRABS THE SPECIFIC MESSAGES SUBCOLLECTION FROM THE ROOM DOC
+        const messagesSubcollectionRef = collection(chatRoomRef, 'Messages');
+
+
+        const q = query(messagesSubcollectionRef, orderBy('timestamp'));
         console.log(q)
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             let messages = [];  
@@ -19,7 +25,7 @@ const Chat = () => {
             setMessages(messages)
         })
         return () => unsubscribe();
-    }, [])
+    }, [roomName])
 
     return (
     <>
