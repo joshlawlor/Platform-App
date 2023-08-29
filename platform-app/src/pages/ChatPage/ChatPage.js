@@ -3,16 +3,19 @@ import './ChatPage.css'
 import Navbar from "../Navbar/Navbar";
 import { getUser } from "../../service/AuthService";
 import Chat from "../../components/Chat";
+import CreateChat from "../../components/CreateChat";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { ChatRooms } from "../../components/ChatRooms";
 // import { GoogleAuthProvider , signInWithRedirect} from "firebase/auth";
 
 function ChatPage() {
-  if (getUser() === undefined) {
+  const [chatUser] = useAuthState(auth);
+
+  if (getUser() === undefined || chatUser === null) {
     window.location.replace("/");
   }
 
-  const [chatUser] = useAuthState(auth);
   console.log(chatUser);
 
   // const chatSignIn = () => {
@@ -25,13 +28,14 @@ function ChatPage() {
       <Navbar></Navbar>
       <div className="chat-page-container">
         <div className="chat-header">
-
-        {chatUser ? `Hello ${chatUser.displayName}` :  <button>SIGN INTO CHAT</button>}
+      <ChatRooms/>
+    <br/>
+        {/* {chatUser ? `Hello ${chatUser.displayName}` :  <button>SIGN INTO CHAT</button>} */}
          
         
         </div>
         <div className="chat-content">
-          {chatUser ? <Chat/> : null}
+          {/* {chatUser ? <Chat/> : null} */}
         </div>
       </div>
     </div>
