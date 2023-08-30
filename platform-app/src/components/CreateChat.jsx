@@ -11,6 +11,7 @@ import {
 
 const CreateChat = () => {
   const [input, setInput] = useState("");
+  const [userList, setUserList] = useState("");
 
   const createChat = async (e) => {
     e.preventDefault();
@@ -32,6 +33,16 @@ const CreateChat = () => {
       timestamp: serverTimestamp(),
     });
 
+    //THIS IS THE ROUTE TO CREATE A USERS SUBCOLLECTION INSIDE THE CHAT DOCMENT
+
+    const usersSubCollectionRef = collection(chatDocRef, "Users");
+
+    await addDoc(usersSubCollectionRef, {
+      text: "User List:",
+      users: [userList],
+      timestamp: serverTimestamp(),
+    });
+
     //THIS IS THE ROUTE TO CREATE A MESSAGES SUBCOLLECTION INSIDE THE CHAT DOCMENT
 
     const messagesSubcollectionRef = collection(chatDocRef, "Messages");
@@ -40,7 +51,9 @@ const CreateChat = () => {
       text: "Chat Created",
       timestamp: serverTimestamp(),
     });
+
     setInput("");
+    setUserList("");
   };
 
   return (
@@ -50,6 +63,13 @@ const CreateChat = () => {
         onChange={(e) => setInput(e.target.value)}
         type="text"
         placeholder="Chat Name"
+      />
+
+      <input
+        value={userList}
+        onChange={(e) => setUserList(e.target.value)}
+        type="text"
+        placeholder="Add User (1 at a time)"
       />
 
       <button>Create a New Chat</button>
