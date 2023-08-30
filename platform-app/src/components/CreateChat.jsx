@@ -43,12 +43,11 @@ const CreateChat = () => {
       timestamp: serverTimestamp(),
     });
 
-    //THIS IS THE ROUTE TO CREATE A USERS SUBCOLLECTION INSIDE THE CHAT DOCMENT
+    //THIS IS THE ROUTE TO CREATE A USERS SUBCOLLECTION INSIDE THE CHAT DOCMENT, THEN A DOCUMENT NAMED USER LIST INTO THE USERS SUBCOLLECTION
 
-    const usersSubCollectionRef = collection(chatDocRef, "Users");
+    const userlistDocRef = doc(collection(chatDocRef, "Users"), "USER LIST");
 
-    await addDoc(usersSubCollectionRef, {
-      text: "User List:",
+    await setDoc(userlistDocRef, {
       users: userList,
       timestamp: serverTimestamp(),
     });
@@ -85,9 +84,11 @@ const CreateChat = () => {
         />
       ))}
 
-      <button type="button" onClick={handleAddUser}>Add User</button> 
-        <br/>
-        <br/>
+      <button type="button" onClick={handleAddUser}>
+        Add User
+      </button>
+      <br />
+      <br />
       <button type="submit">Create a New Chat</button>
     </form>
   );
