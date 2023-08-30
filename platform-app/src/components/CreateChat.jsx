@@ -11,7 +11,17 @@ import {
 
 const CreateChat = () => {
   const [input, setInput] = useState("");
-  const [userList, setUserList] = useState("");
+  const [userList, setUserList] = useState([""]);
+
+  const handleAddUser = () => {
+    setUserList([...userList, ""]);
+  };
+
+  const handleUserChange = (index, value) => {
+    const updatedUserList = [...userList];
+    updatedUserList[index] = value;
+    setUserList(updatedUserList);
+  };
 
   const createChat = async (e) => {
     e.preventDefault();
@@ -39,7 +49,7 @@ const CreateChat = () => {
 
     await addDoc(usersSubCollectionRef, {
       text: "User List:",
-      users: [userList],
+      users: userList,
       timestamp: serverTimestamp(),
     });
 
@@ -53,7 +63,7 @@ const CreateChat = () => {
     });
 
     setInput("");
-    setUserList("");
+    setUserList([""]);
   };
 
   return (
@@ -65,14 +75,20 @@ const CreateChat = () => {
         placeholder="Chat Name"
       />
 
-      <input
-        value={userList}
-        onChange={(e) => setUserList(e.target.value)}
-        type="text"
-        placeholder="Add User (1 at a time)"
-      />
+      {userList.map((user, index) => (
+        <input
+          key={index}
+          value={user}
+          onChange={(e) => handleUserChange(index, e.target.value)}
+          type="text"
+          placeholder="Add User (1 at a time)"
+        />
+      ))}
 
-      <button>Create a New Chat</button>
+      <button type="button" onClick={handleAddUser}>Add User</button> 
+        <br/>
+        <br/>
+      <button type="submit">Create a New Chat</button>
     </form>
   );
 };
