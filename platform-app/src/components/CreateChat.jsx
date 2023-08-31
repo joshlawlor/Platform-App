@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 
 const CreateChat = () => {
+  const { uid, displayName } = auth.currentUser;
   const [input, setInput] = useState("");
   const [userList, setUserList] = useState([""]);
 
@@ -18,9 +19,9 @@ const CreateChat = () => {
   };
 
   const handleUserChange = (index, value) => {
-    const updatedUserList = [...userList];
+    const updatedUserList = [...userList]
     updatedUserList[index] = value;
-    setUserList(updatedUserList);
+    setUserList([...updatedUserList]);
   };
 
   const createChat = async (e) => {
@@ -29,28 +30,29 @@ const CreateChat = () => {
       alert("Please enter a valid chat name");
       return;
     }
-    const { uid, displayName } = auth.currentUser;
 
     //THIS IS THE ROUTE TO THE CHAT COLLECTION
     const chatCollectionRef = collection(db, "chats");
 
     const chatDocRef = doc(chatCollectionRef);
 
+    const finalUsers = [displayName, ...userList]
     await setDoc(chatDocRef, {
       name: input,
       owner: displayName,
+      userList: finalUsers,
       uid,
       timestamp: serverTimestamp(),
     });
 
     //THIS IS THE ROUTE TO CREATE A USERS SUBCOLLECTION INSIDE THE CHAT DOCMENT, THEN A DOCUMENT NAMED USER LIST INTO THE USERS SUBCOLLECTION
 
-    const userlistDocRef = doc(collection(chatDocRef, "Users"), "USER LIST");
+    // const userlistDocRef = doc(collection(chatDocRef, "Users"), "USER LIST");
 
-    await setDoc(userlistDocRef, {
-      users: userList,
-      timestamp: serverTimestamp(),
-    });
+    // await setDoc(userlistDocRef, {
+    //   users: userList,
+    //   timestamp: serverTimestamp(),
+    // });
 
     //THIS IS THE ROUTE TO CREATE A MESSAGES SUBCOLLECTION INSIDE THE CHAT DOCMENT
 
