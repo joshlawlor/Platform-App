@@ -6,22 +6,29 @@ import Room from "./Rooms";
 
 export const ChatRooms = () => {
   const { uid, displayName } = auth.currentUser;
+
   const [rooms, setRooms] = useState([]);
   const scroll = useRef();
 
   useEffect(() => {
-    const q = query(collection(db, "chats"), where("userList", "array-contains", displayName));
-    console.log(q);
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      let chats = [];
-      querySnapshot.forEach((doc) => {
-        chats.push({ ...doc.data(), id: doc.id });
-      });
-      setRooms(chats);
-    });
-    return () => unsubscribe();
 
-  }, [displayName]);
+    if(displayName){
+      const q = query(collection(db, "chats"), where("userList", "array-contains", displayName));
+      console.log(q);
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        let chats = [];
+        querySnapshot.forEach((doc) => {
+          chats.push({ ...doc.data(), id: doc.id });
+        });
+        setRooms(chats);
+      });
+      return () => unsubscribe();
+
+
+    }
+   
+
+  }, [uid,displayName]);
 
   return (
     <div>

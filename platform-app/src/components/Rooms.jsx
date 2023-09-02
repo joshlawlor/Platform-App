@@ -16,6 +16,7 @@ const Room = ({room}) => {
         <div onClick={showMessages} className='room'>
             <p className='name'>{room.name}</p>
             <p>Owner: {room.owner}</p>
+            <p>Users: {room.userList}</p>
         </div>
 
     </div>

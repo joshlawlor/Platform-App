@@ -22,6 +22,7 @@ function ChatPage() {
   //   const provider = new GoogleAuthProvider()
   //   signInWithRedirect(auth, provider);
   // }
+  
 
   return (
     <div className="chat-page">
