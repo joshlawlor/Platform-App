@@ -12,15 +12,17 @@ import {
 
 //ALGOLA EXTENSIONS 
 //THIS EXTENSION INDEXES THE USERS COLLECTION IN FIRESTORE
+const algoliaAppId = process.env.REACT_APP_ALGOLIA_APP_ID
+const algoliaApiKey = process.env.REACT_APP_ALGOLIA_API_KEY
 const algoliasearch = require('algoliasearch');
-const client = algoliasearch("MWZ58POI5N", "7f34a82ecad5e5b864407f07815b9260");
+const client = algoliasearch(algoliaAppId, algoliaApiKey);
 const index = client.initIndex('dev_users');
 
 
 //THIS FUNCTION SEARCHES THE ALGOLIA INDEX OF USERS COLLECTION AND RETURNS WHAT MATCHES
 index.search('a')
 .then(({hits}) => {
-  console.log(hits);
+  console.log('USER SEARCH',hits);
 })
 .catch(err => {
   console.log(err);
