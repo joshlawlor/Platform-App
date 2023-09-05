@@ -10,7 +10,19 @@ import {
 } from "firebase/firestore";
 
 const CreateChat = () => {
+  const { uid, displayName } = auth.currentUser;
   const [input, setInput] = useState("");
+  const [userList, setUserList] = useState([""]);
+
+  const handleAddUser = () => {
+    setUserList([...userList, ""]);
+  };
+
+  const handleUserChange = (index, value) => {
+    const updatedUserList = [...userList]
+    updatedUserList[index] = value;
+    setUserList([...updatedUserList]);
+  };
 
   const createChat = async (e) => {
     e.preventDefault();
@@ -18,19 +30,29 @@ const CreateChat = () => {
       alert("Please enter a valid chat name");
       return;
     }
-    const { uid, displayName } = auth.currentUser;
 
     //THIS IS THE ROUTE TO THE CHAT COLLECTION
     const chatCollectionRef = collection(db, "chats");
 
     const chatDocRef = doc(chatCollectionRef);
 
+    const finalUsers = [displayName, ...userList]
     await setDoc(chatDocRef, {
       name: input,
       owner: displayName,
+      userList: finalUsers,
       uid,
       timestamp: serverTimestamp(),
     });
+
+    //THIS IS THE ROUTE TO CREATE A USERS SUBCOLLECTION INSIDE THE CHAT DOCMENT, THEN A DOCUMENT NAMED USER LIST INTO THE USERS SUBCOLLECTION
+
+    // const userlistDocRef = doc(collection(chatDocRef, "Users"), "USER LIST");
+
+    // await setDoc(userlistDocRef, {
+    //   users: userList,
+    //   timestamp: serverTimestamp(),
+    // });
 
     //THIS IS THE ROUTE TO CREATE A MESSAGES SUBCOLLECTION INSIDE THE CHAT DOCMENT
 
@@ -40,7 +62,9 @@ const CreateChat = () => {
       text: "Chat Created",
       timestamp: serverTimestamp(),
     });
+
     setInput("");
+    setUserList([""]);
   };
 
   return (
@@ -52,7 +76,22 @@ const CreateChat = () => {
         placeholder="Chat Name"
       />
 
-      <button>Create a New Chat</button>
+      {userList.map((user, index) => (
+        <input
+          key={index}
+          value={user}
+          onChange={(e) => handleUserChange(index, e.target.value)}
+          type="text"
+          placeholder="Add User (1 at a time)"
+        />
+      ))}
+
+      <button type="button" onClick={handleAddUser}>
+        Add User
+      </button>
+      <br />
+      <br />
+      <button type="submit">Create a New Chat</button>
     </form>
   );
 };

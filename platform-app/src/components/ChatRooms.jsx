@@ -1,26 +1,34 @@
 import React, { useState, useRef, useEffect } from "react";
 import CreateChat from "./CreateChat";
-import { db } from "../firebase";
-import { query, collection, orderBy, onSnapshot } from "firebase/firestore";
+import { db , auth} from "../firebase";
+import { query, collection, orderBy, onSnapshot, where } from "firebase/firestore";
 import Room from "./Rooms";
 
 export const ChatRooms = () => {
+  const { uid, displayName } = auth.currentUser;
+
   const [rooms, setRooms] = useState([]);
   const scroll = useRef();
 
   useEffect(() => {
-    const q = query(collection(db, "chats"), orderBy("timestamp", "desc"));
-    console.log(q);
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      let chats = [];
-      querySnapshot.forEach((doc) => {
-        chats.push({ ...doc.data(), id: doc.id });
-      });
-      setRooms(chats);
-    });
-    return () => unsubscribe();
 
-  }, []);
+    if(displayName){
+      const q = query(collection(db, "chats"), where("userList", "array-contains", displayName));
+      console.log(q);
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        let chats = [];
+        querySnapshot.forEach((doc) => {
+          chats.push({ ...doc.data(), id: doc.id });
+        });
+        setRooms(chats);
+      });
+      return () => unsubscribe();
+
+
+    }
+   
+
+  }, [uid,displayName]);
 
   return (
     <div>
