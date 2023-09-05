@@ -9,6 +9,24 @@ import {
   createId,
 } from "firebase/firestore";
 
+
+//ALGOLA EXTENSIONS 
+//THIS EXTENSION INDEXES THE USERS COLLECTION IN FIRESTORE
+const algoliasearch = require('algoliasearch');
+const client = algoliasearch("MWZ58POI5N", "7f34a82ecad5e5b864407f07815b9260");
+const index = client.initIndex('dev_users');
+
+
+//THIS FUNCTION SEARCHES THE ALGOLIA INDEX OF USERS COLLECTION AND RETURNS WHAT MATCHES
+index.search('a')
+.then(({hits}) => {
+  console.log(hits);
+})
+.catch(err => {
+  console.log(err);
+})
+
+
 const CreateChat = () => {
   const { uid, displayName } = auth.currentUser;
   const [input, setInput] = useState("");
