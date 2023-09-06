@@ -1,18 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { getUser } from "../../service/AuthService";
 import Navbar from "../Navbar/Navbar";
 import "./AppHome.css";
 function AppHome() {
 
-  if(getUser() === undefined){
-    console.log(getUser())
-    console.log('NO USER')
-    window.location.replace('/');
-  }
     const user = getUser();
     console.log(user);
-    const name = user.username !== "undefined" && user ? user.username : "";
-    
+    const [username, setUsername] = useState("Guest")
+    if(user){
+      setUsername(user.username);
+    }
+    const name = username
 
   
   console.log(sessionStorage.user);
@@ -21,7 +19,7 @@ function AppHome() {
     <div className="AppHome">
       <Navbar />
       <header className="App-header">
-        <h1 className="home-title">Welcome {name} </h1>
+        {user ? <h1 className="home-title">Welcome {name} </h1> : <h1 className="home-title">Welcome</h1> }
         <div className="castle-wall-container">
           
             

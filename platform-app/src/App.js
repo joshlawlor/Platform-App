@@ -4,7 +4,7 @@ import axios from "axios";
 // import PublicRoute from "./routes/PublicRoute";
 // import PrivateRoute from "./routes/PrivateRoute";
 import {getUser, getToken, setUserSession, resetUserSession} from "./service/AuthService";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import "./App.css";
 
@@ -25,12 +25,13 @@ const verifyTokenAPIURL = process.env.REACT_APP_VERIFY_URL
 const apiKey = process.env.REACT_APP_API_KEY  
 
 function App() {
-
+  const navigate = useNavigate();
   const [isAuthenticating, setAuthenticating] = useState(true)
 
   useEffect(() => {
     const token = getToken();
     if(token === 'undefined' || token === undefined || token === null || !token){
+      navigate('/')
       return;
     }
 
@@ -55,7 +56,7 @@ function App() {
     })
 
 
-  }, [])
+  }, [navigate])
 
   const token = getToken();
   if(isAuthenticating && token){
@@ -65,9 +66,7 @@ function App() {
   const AppContextValue = {};
 
   return (
-    <AppContext.Provider value={AppContextValue}>
-
-    <BrowserRouter>
+    // <AppContext.Provider value={AppContextValue}>
       <SignUpProvider>
         <Routes>
           <Route path="/" element={<AppLanding />} />
@@ -79,8 +78,7 @@ function App() {
           <Route path='/chat/room' element={<ChatRoom />} />
         </Routes>
       </SignUpProvider>
-    </BrowserRouter>
-    </AppContext.Provider>
+    // </AppContext.Provider>
   );
 }
 
