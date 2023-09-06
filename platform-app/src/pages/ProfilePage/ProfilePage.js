@@ -5,18 +5,12 @@ import './ProfilePage.css'
 function ProfilePage() {
     
     const user = getUser();
-    console.log(user);
-    const [username, setUsername] = useState("Guest")
-    if(user){
-      setUsername(user.username);
-    }
-    const name = username
-
+    const username = user ? user.username : "Guest";
     return(
         <div className="profile-page">
             <Navbar></Navbar>
             <div className="profile-container">
-                <h1>Welcome {name}</h1>
+                <h1>Welcome {username}</h1>
             </div>
 
         </div>

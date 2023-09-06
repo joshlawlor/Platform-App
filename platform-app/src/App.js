@@ -31,7 +31,9 @@ function App() {
   useEffect(() => {
     const token = getToken();
     if(token === 'undefined' || token === undefined || token === null || !token){
-      navigate('/')
+      if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
+        navigate('/')
+      }
       return;
     }
 
