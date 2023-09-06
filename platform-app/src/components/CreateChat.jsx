@@ -18,21 +18,41 @@ const algoliasearch = require('algoliasearch');
 const client = algoliasearch(algoliaAppId, algoliaApiKey);
 const index = client.initIndex('dev_users');
 
-
-//THIS FUNCTION SEARCHES THE ALGOLIA INDEX OF USERS COLLECTION AND RETURNS WHAT MATCHES
-index.search('a')
-.then(({hits}) => {
-  console.log('USER SEARCH',hits);
-})
-.catch(err => {
-  console.log(err);
-})
-
-
 const CreateChat = () => {
   const { uid, displayName } = auth.currentUser;
   const [input, setInput] = useState("");
+  const [searchInput, setSearchInput] = useState("");
   const [userList, setUserList] = useState([""]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchTimeout, setSearchTimeout] = useState(null);
+
+ 
+const handleSearchInputChange = (e) => {
+  const value = e.target.value;
+  setSearchInput(value);
+  if(searchTimeout) {
+    clearTimeout(searchTimeout);
+  }
+
+  setSearchTimeout(
+    setTimeout(() => {
+      searchUsers(value)
+    }, 500)
+  );
+}
+
+const searchUsers = (value) => {
+ //THIS FUNCTION SEARCHES THE ALGOLIA INDEX OF USERS COLLECTION AND RETURNS WHAT MATCHES
+ index.search(value)
+ .then(({hits}) => {
+   console.log('USER SEARCH',hits);
+   setSearchResults(hits);
+ })
+ .catch(err => {
+   console.log(err);
+ })
+ 
+}
 
   const handleAddUser = () => {
     setUserList([...userList, ""]);
@@ -65,17 +85,6 @@ const CreateChat = () => {
       timestamp: serverTimestamp(),
     });
 
-    //THIS IS THE ROUTE TO CREATE A USERS SUBCOLLECTION INSIDE THE CHAT DOCMENT, THEN A DOCUMENT NAMED USER LIST INTO THE USERS SUBCOLLECTION
-
-    // const userlistDocRef = doc(collection(chatDocRef, "Users"), "USER LIST");
-
-    // await setDoc(userlistDocRef, {
-    //   users: userList,
-    //   timestamp: serverTimestamp(),
-    // });
-
-    //THIS IS THE ROUTE TO CREATE A MESSAGES SUBCOLLECTION INSIDE THE CHAT DOCMENT
-
     const messagesSubcollectionRef = collection(chatDocRef, "Messages");
 
     await addDoc(messagesSubcollectionRef, {
@@ -95,6 +104,20 @@ const CreateChat = () => {
         type="text"
         placeholder="Chat Name"
       />
+      <input
+        value={searchInput}
+        onChange={(e) => handleSearchInputChange(e)}
+        type="text"
+        placeholder="Search for user (username)"
+      />
+       {searchResults.map((result) => (
+        <button
+          key={result.objectID}
+          onClick={() => handleUserChange(userList.length, result.username)}
+        >
+          {result.username}
+        </button>
+      ))}
 
       {userList.map((user, index) => (
         <input
