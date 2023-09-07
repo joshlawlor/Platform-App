@@ -22,10 +22,9 @@ const CreateChat = () => {
   const { uid, displayName } = auth.currentUser;
   const [input, setInput] = useState("");
   const [searchInput, setSearchInput] = useState("");
-  const [userList, setUserList] = useState([""]);
+  const [userList, setUserList] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [searchTimeout, setSearchTimeout] = useState(null);
-
  
 const handleSearchInputChange = (e) => {
   const value = e.target.value;
@@ -54,14 +53,15 @@ const searchUsers = (value) => {
  
 }
 
-  const handleAddUser = () => {
-    setUserList([...userList, ""]);
-  };
-
   const handleUserChange = (index, value) => {
     const updatedUserList = [...userList]
-    updatedUserList[index] = value;
+    if (!updatedUserList.includes(value)) {
+      // If it doesn't exist, add it to the end of the array
+      updatedUserList.push(value);
+    }
+     
     setUserList([...updatedUserList]);
+    console.log(userList);
   };
 
   const createChat = async (e) => {
@@ -76,11 +76,16 @@ const searchUsers = (value) => {
 
     const chatDocRef = doc(chatCollectionRef);
 
-    const finalUsers = [displayName, ...userList]
+    if(!userList.includes(displayName)) {
+      console.log(displayName + ' changed')
+      userList.push(displayName);
+    }
+    
+    // const finalUsers = [displayName, ...userList]
     await setDoc(chatDocRef, {
       name: input,
       owner: displayName,
-      userList: finalUsers,
+      userList: userList,
       uid,
       timestamp: serverTimestamp(),
     });
@@ -94,6 +99,8 @@ const searchUsers = (value) => {
 
     setInput("");
     setUserList([""]);
+    setSearchInput("")
+    setSearchResults([])
   };
 
   return (
@@ -110,28 +117,25 @@ const searchUsers = (value) => {
         type="text"
         placeholder="Search for user (username)"
       />
-       {searchResults.map((result) => (
+      <div>
+      {searchResults.map((result, index) => (
         <button
+        type="button"
           key={result.objectID}
-          onClick={() => handleUserChange(userList.length, result.username)}
+          onClick={() => handleUserChange(index, result.username)}
         >
           {result.username}
         </button>
       ))}
+      </div>
+      <div>
+        <strong>Current User List:</strong>
+        {userList.map((user, index) => (
+          // Corrected this line to return JSX
+          <p key={index}>{user}</p>
+        ))}
+      </div>
 
-      {userList.map((user, index) => (
-        <input
-          key={index}
-          value={user}
-          onChange={(e) => handleUserChange(index, e.target.value)}
-          type="text"
-          placeholder="Add User (1 at a time)"
-        />
-      ))}
-
-      <button type="button" onClick={handleAddUser}>
-        Add User
-      </button>
       <br />
       <br />
       <button type="submit">Create a New Chat</button>
