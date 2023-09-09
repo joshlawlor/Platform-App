@@ -6,8 +6,17 @@ import { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 // import { useSignupState } from '../../context/SignUpProvider';
 import dragon from "../../assets/images/dragon.png";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  addDoc,
+  collection,
+  serverTimestamp,
+  doc,
+  setDoc,
+  createId,
+} from "firebase/firestore";
+
 //ENV VARIABLES
 const registerURL = process.env.REACT_APP_REGISTER_URL;
 const apiKey = process.env.REACT_APP_API_KEY;
@@ -65,6 +74,15 @@ function AppRegister() {
           .catch((error) => {
             console.log(error.message, error.code);
           });
+
+        const userCollectionRef = collection(db, "users");
+        const userDocRef = doc(userCollectionRef);
+        setDoc(userDocRef, {
+          username: username,
+          email: email,
+          timestamp: serverTimestamp(),
+        });
+
         navigate("/login");
       })
       .catch((error) => {

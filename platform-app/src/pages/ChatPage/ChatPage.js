@@ -12,24 +12,12 @@ import { ChatRooms } from "../../components/ChatRooms";
 function ChatPage() {
   const [chatUser] = useAuthState(auth);
 
-  if (getUser() === undefined || chatUser === null) {
-    window.location.replace("/");
-  }
-
-  console.log(chatUser);
-
-  // const chatSignIn = () => {
-  //   const provider = new GoogleAuthProvider()
-  //   signInWithRedirect(auth, provider);
-  // }
-  
-
   return (
     <div className="chat-page">
       <Navbar></Navbar>
       <div className="chat-page-container">
         <div className="chat-header">
-      <ChatRooms/>
+          {chatUser ? <ChatRooms /> : <div>No Chat User Found</div>}
     <br/>
         {/* {chatUser ? `Hello ${chatUser.displayName}` :  <button>SIGN INTO CHAT</button>} */}
          

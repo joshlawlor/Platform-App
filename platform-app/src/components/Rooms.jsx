@@ -1,8 +1,6 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
-
 import './Rooms.css'
-import Chat from './Chat'
 const Room = ({room}) => {
   const navigate = useNavigate()
     
@@ -11,12 +9,14 @@ const Room = ({room}) => {
             //CHAT COMPONENT SHOULD SEARCH DB/CHATS/CHAT_ID/MESSAGES AND DISPLAY CURRENT ROOMS MESSAGES ONLY
             navigate('/chat/room', {state:{id: room.id, name: room.name}})
     }
+    const userListString = room.userList.join(', ');
+
   return (
     <div className='rooms-container'>
         <div onClick={showMessages} className='room'>
             <p className='name'>{room.name}</p>
             <p>Owner: {room.owner}</p>
-            <p>Users: {room.userList}</p>
+            <p>Users: {userListString}</p>
         </div>
 
     </div>
