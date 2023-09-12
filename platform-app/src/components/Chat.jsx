@@ -6,8 +6,7 @@ import SendMessage from "./SendMessage";
 
 const Chat = ({roomID, roomName}) => {
     const [messages, setMessages] = useState([]);
-    const scroll = useRef()
-
+    const scroll = useRef()    
     useEffect(() => {
         //THIS GRABS THE SPECIFIC ROOM DOC FROM THE CHATS COLLECTION
         const chatRoomRef= doc(collection(db, 'chats'), roomID);
