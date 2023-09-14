@@ -9,6 +9,9 @@ const Chat = ({roomID, roomName, roomOwner}) => {
     const [chatUser] = useAuthState(auth);
     const [isOwner, setIsOwner] = useState(null);
     const [showForm, setShowForm] = useState(false);
+    const [editingRoomName, setEditingRoomName] = useState(false);
+    const [newRoomName, setNewRoomName] = useState("");
+    const [roomTitle, setRoomTitle] = useState("");
     const [messages, setMessages] = useState([]);
     const scroll = useRef()    
     useEffect(() => {
@@ -44,14 +47,21 @@ const Chat = ({roomID, roomName, roomOwner}) => {
         console.error("Error deleting chat: ", error);
       }
     };
+
+    const handleRoomNameChange = (e) => {
+        setNewRoomName(e.target.value); 
+      };
+    
     const editRoomName = async () => {
-      const newName = "eeeeggeeess";
   
       try {
         await updateDoc(chatRoomRef, {
-          name: newName,
+          name: newRoomName ,
         });
-        window.location.replace("/chat");
+        setShowForm(false);
+        setRoomTitle(newRoomName);
+        setEditingRoomName(false);
+        // window.location.replace("/chat");
       } catch (error) {
         console.error("Error editing chat: ", error);
       }
@@ -65,7 +75,7 @@ const Chat = ({roomID, roomName, roomOwner}) => {
     <>
       <div className="chat-component-main">
         <div className="chat-edit-container">
-        <h1>CHAT ROOM:{roomName}</h1>
+        <h1>CHAT ROOM:{editingRoomName ? newRoomName : roomTitle || roomName}</h1>
         {isOwner ? (
           <button onClick={deleteChatRoom} type="button">
                       DELETE CHAT
@@ -83,7 +93,10 @@ const Chat = ({roomID, roomName, roomOwner}) => {
           <div>
             <form>
               <label>New Room Name:</label>
-              <input type="text" />
+              <input type="text" 
+              value={newRoomName} 
+              onChange={handleRoomNameChange}
+              />
               <button type="button" onClick={editRoomName}>Save</button>
               <br />
             </form>
