@@ -58,13 +58,8 @@ const Chat = ({roomID, roomName, roomOwner}) => {
     };
   
     const openEditForm = () => {
-      setShowForm(true);
+        setShowForm(!showForm);
     };
-  
-    const closeEditForm = () => {
-      setShowForm(false);
-    };
-
 
     return (
     <>
@@ -73,21 +68,20 @@ const Chat = ({roomID, roomName, roomOwner}) => {
         <h1>CHAT ROOM:{roomName}</h1>
         {isOwner ? (
           <button onClick={deleteChatRoom} type="button">
-            DELETE CHAT
-          </button>
+                      DELETE CHAT
+        </button>
         ) : null}
+        <br/>
+        <br/>
         {isOwner ? (
           <button onClick={openEditForm} type="button">
             EDIT CHAT
           </button>
         ) : null}
+        
         {showForm && (
           <div>
             <form>
-              <button type="button" onClick={closeEditForm}>
-                X
-              </button>
-
               <label>New Room Name:</label>
               <input type="text" />
               <button type="button" onClick={editRoomName}>Save</button>
