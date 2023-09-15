@@ -15,6 +15,7 @@ const Chat = ({roomID, roomName, roomOwner, userList}) => {
     const [messages, setMessages] = useState([]);
     const scroll = useRef()    
     useEffect(() => {
+        console.log(roomOwner)
         //THIS CHECKS IF CHAT USER IS THE OWNER (GIVES THEM EDITING POWER)
         if (roomOwner === chatUser.displayName) {
             setIsOwner(chatUser.displayName);
@@ -123,9 +124,14 @@ const Chat = ({roomID, roomName, roomOwner, userList}) => {
               <label>User List:</label>
                     <div className="userList-container">
                   {userList.map((user, index) => (
-                    <div key={index}>{user}
-                    <button type="button" onClick={() => removeUserFromList(user)}>X</button>
-                    </div>
+                     user !== roomOwner ? (
+                        <div key={index}>
+                          {user}
+                          <button type="button" onClick={() => removeUserFromList(user)}>X</button>
+                        </div>
+                      ) : null
+                    
+
                   ))}
                 </div>
             </form>
