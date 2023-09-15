@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import "./Chat.css";
 import Message from "./Message";
 import { auth, db } from "../firebase";
 import {
@@ -90,7 +91,7 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
 
   const handleUserChange = (index, value) => {
     const updatedUserList = [...userList];
-    console.log(updatedUserList)
+    console.log(updatedUserList);
     if (!updatedUserList.includes(value)) {
       // If it doesn't exist, add it to the end of the array
       updatedUserList.push(value);
@@ -108,7 +109,7 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
     } catch (error) {
       console.error("Error editing chat user list: ", error);
     }
-  }
+  };
 
   const handleSearchInputChange = (e) => {
     //**NEED TO PUT A CHECK HERE IN CASE OF BLANK SEARCH */
@@ -164,68 +165,78 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
             CHAT ROOM:{editingRoomName ? newRoomName : roomTitle || roomName}
           </h1>
           {isOwner ? (
-            <button onClick={deleteChatRoom} type="button">
-              DELETE CHAT
-            </button>
-          ) : null}
-          <br />
-          <br />
-          {isOwner ? (
             <button onClick={openEditForm} type="button">
               EDIT CHAT
             </button>
           ) : null}
 
           {showForm && (
-            <div>
-              <form>
-                <label>New Room Name:</label>
-                <input
-                  type="text"
-                  value={newRoomName}
-                  onChange={handleRoomNameChange}
-                />
-                <button type="button" onClick={editRoomName}>
-                  Edit Chat Name
-                </button>
-                <br />
-
-                <label>User List:</label>
-                <div className="userList-container">
-                  {userList.map((user, index) =>
-                    user !== roomOwner ? (
-                      <div key={index}>
-                        {user}
+            <div className="editForm-container">
+              {/*  */}
+              <form className="editForm">
+                {/*  */}
+                <div className="editBox">
+                  <label>New Room Name:</label>
+                  <input
+                    type="text"
+                    value={newRoomName}
+                    onChange={handleRoomNameChange}
+                  />
+                  <button type="button" onClick={editRoomName}>
+                    Edit Chat Name
+                  </button>
+                </div>
+                {/*  */}
+                <div className="editBox">
+                  <div className="userSearch-container">
+                    <label>Add a User:</label>
+                    <input
+                      value={searchInput}
+                      onChange={(e) => handleSearchInputChange(e)}
+                      type="text"
+                      placeholder="Search for user to add (username)"
+                    />
+                    <div className="searchResults-container">
+                      {searchResults.map((result, index) => (
                         <button
                           type="button"
-                          onClick={() => removeUserFromList(user)}
+                          key={result.objectID}
+                          onClick={() =>
+                            handleUserChange(index, result.username)
+                          }
                         >
-                          X
+                          {result.username}
                         </button>
-                      </div>
-                    ) : null
-                  )}
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <br />
-                <div className="userSearch-container">
-                  <label>Add a User:</label>
-                  <input
-                    value={searchInput}
-                    onChange={(e) => handleSearchInputChange(e)}
-                    type="text"
-                    placeholder="Search for user to add (username)"
-                  />
+                {/*  */}
+                <div className="editBox">
+                  <label>User List:</label>
+                  <div id="userList-container">
+                    {userList.map((user, index) =>
+                      user !== roomOwner ? (
+                        <div key={index}>
+                          {user}
+                          <button
+                            type="button"
+                            onClick={() => removeUserFromList(user)}
+                          >
+                            X
+                          </button>
+                        </div>
+                      ) : null
+                    )}
+                  </div>
                 </div>
-                <div className="searchResults-container">
-                  {searchResults.map((result, index) => (
-                    <button
-                      type="button"
-                      key={result.objectID}
-                      onClick={() => handleUserChange(index, result.username)}
-                    >
-                      {result.username}
+                {/*  */}
+                <div className="editBox">
+                  {isOwner ? (
+                    <button onClick={deleteChatRoom} type="button">
+                      DELETE CHAT
                     </button>
-                  ))}
+                  ) : null}
                 </div>
               </form>
             </div>
