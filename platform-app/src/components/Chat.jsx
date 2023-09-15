@@ -5,7 +5,7 @@ import {query, doc, collection, orderBy, deleteDoc, updateDoc, onSnapshot}from '
 import { useAuthState } from "react-firebase-hooks/auth";
 import SendMessage from "./SendMessage";
 
-const Chat = ({roomID, roomName, roomOwner}) => {
+const Chat = ({roomID, roomName, roomOwner, userList}) => {
     const [chatUser] = useAuthState(auth);
     const [isOwner, setIsOwner] = useState(null);
     const [showForm, setShowForm] = useState(false);
@@ -51,9 +51,29 @@ const Chat = ({roomID, roomName, roomOwner}) => {
     const handleRoomNameChange = (e) => {
         setNewRoomName(e.target.value); 
       };
+
+      
+
+      const handleUserListChange = async (updatedList) => {
+        try {
+            await updateDoc(chatRoomRef, {
+              userList: updatedList ,
+            });
+            setShowForm(false);
+            setRoomTitle(newRoomName);
+            setEditingRoomName(false);
+            // window.location.replace("/chat");
+          } catch (error) {
+            console.error("Error editing chat: ", error);
+          }
+      };
+
+      const removeUserFromList = (userToRemove) => {
+        const updatedList = userList.filter((user) => user !== userToRemove);
+        handleUserListChange(updatedList);
+      };
     
     const editRoomName = async () => {
-  
       try {
         await updateDoc(chatRoomRef, {
           name: newRoomName ,
@@ -97,8 +117,17 @@ const Chat = ({roomID, roomName, roomOwner}) => {
               value={newRoomName} 
               onChange={handleRoomNameChange}
               />
-              <button type="button" onClick={editRoomName}>Save</button>
+              <button type="button" onClick={editRoomName}>Edit Chat Name</button>
               <br />
+
+              <label>User List:</label>
+                    <div className="userList-container">
+                  {userList.map((user, index) => (
+                    <div key={index}>{user}
+                    <button type="button" onClick={() => removeUserFromList(user)}>X</button>
+                    </div>
+                  ))}
+                </div>
             </form>
           </div>
         )}

@@ -27,6 +27,7 @@ const CreateChat = () => {
 
 
   const handleSearchInputChange = (e) => {
+    //**NEED TO PUT A CHECK HERE IN CASE OF BLANK SEARCH */
     const value = e.target.value;
     setSearchInput(value);
     if (searchTimeout) {

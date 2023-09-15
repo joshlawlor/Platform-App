@@ -11,13 +11,15 @@ const ChatRoom = () => {
   const roomID = location.state.id;
   const roomName = location.state.name;
   const roomOwner = location.state.owner;
+  const userList = location.state.userList;
+
   const [chatUser] = useAuthState(auth);
 
   return (
     <div>
       <Navbar></Navbar>
       <div>
-        {chatUser ? <Chat roomName={roomName} roomID={roomID} roomOwner={roomOwner} /> : null}
+        {chatUser ? <Chat roomName={roomName} roomID={roomID} roomOwner={roomOwner} userList={userList} /> : null}
       </div>
     </div>
   );
