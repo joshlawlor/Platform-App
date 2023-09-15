@@ -1,0 +1,4 @@
+Need to put in a check in case of blank user input, so we don't search ALL USERS
+    (Can tie this into only showing a users friend eventually?)
+
+    

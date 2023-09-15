@@ -23,8 +23,11 @@ const CreateChat = () => {
   const [userList, setUserList] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [searchTimeout, setSearchTimeout] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+
 
   const handleSearchInputChange = (e) => {
+    //**NEED TO PUT A CHECK HERE IN CASE OF BLANK SEARCH */
     const value = e.target.value;
     setSearchInput(value);
     if (searchTimeout) {
@@ -109,8 +112,15 @@ const CreateChat = () => {
     setSearchResults([]);
     return;
   }
+  
+  const openEditForm = () => {
+    setShowForm(!showForm);
+  };
 
   return (
+    <div>
+    <button type="button" onClick={openEditForm}>Create a New Chat</button>
+    {showForm && (
     <form onSubmit={createChat}>
       <input
         value={input}
@@ -147,6 +157,8 @@ const CreateChat = () => {
       <br />
       <button type="submit">Create a New Chat</button>
     </form>
+    )}
+    </div>
   );
 };
 

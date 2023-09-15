@@ -6,10 +6,7 @@ import Room from "./Rooms";
 
 export const ChatRooms = () => {
   const { uid, displayName } = auth.currentUser;
-
   const [rooms, setRooms] = useState([]);
-  const scroll = useRef();
-
   useEffect(() => {
 
     if(displayName){
@@ -35,7 +32,7 @@ export const ChatRooms = () => {
       <CreateChat />
       <br />
       <div>
-        {rooms && rooms.map((room) => <Room key={room.id} room={room} />)}
+        {rooms && rooms.map((room) => <Room key={room.id} room={room} owner={room.owner} />)}
       </div>
     </div>
   );

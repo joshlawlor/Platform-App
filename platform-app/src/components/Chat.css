@@ -1,0 +1,29 @@
+.editForm-container{
+    border: 3px solid black;
+    display: flex;
+    flex-direction: row;
+}
+
+.editForm{
+    border: 3px solid blue;
+    display: flex;
+    flex-direction: row;
+    min-width: 100%;
+
+}
+
+.editBox{
+    display: flex;
+    flex-direction: column;
+    min-width: 15%;
+    margin: 2%;
+}
+
+#userList-container{
+    display: inline;
+    border: 3px solid red;
+    justify-content: center;
+    align-items: space-around;
+    text-align: center;
+    
+}
