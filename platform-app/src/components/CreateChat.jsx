@@ -46,6 +46,7 @@ const CreateChat = () => {
       alert("Please enter a valid chat username");
       return;
     }
+    setSearchInput("")
     //THIS FUNCTION SEARCHES THE ALGOLIA INDEX OF USERS COLLECTION AND RETURNS WHAT MATCHES
     index
       .search(value)

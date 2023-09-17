@@ -1,4 +1,4 @@
-[ ] Need to put in a check in case of blank user input, so we don't search ALL USERS
+[X] Need to put in a check in case of blank user input, so we don't search ALL USERS
         (Can tie this into only showing a users friend eventually?)
 
 [ ] Need the Chat.jsx component to grab most up to date info (userList, chatTitle) whenever user reloads page OR if those values are changed. (Should be instant update for client)

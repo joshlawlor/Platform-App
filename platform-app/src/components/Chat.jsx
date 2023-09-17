@@ -129,6 +129,7 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
   const searchUsers = (value) => {
     if (value === "" || value === " ") {
       alert("Please enter a valid chat username");
+      setSearchInput("")
       return;
     }
     //THIS FUNCTION SEARCHES THE ALGOLIA INDEX OF USERS COLLECTION AND RETURNS WHAT MATCHES
