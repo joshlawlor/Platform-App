@@ -5,6 +5,7 @@ import { auth, db } from "../firebase";
 import {
   query,
   doc,
+  getDoc,
   collection,
   orderBy,
   deleteDoc,
@@ -25,6 +26,7 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [displayUsers, setDisplayUsers] = useState(userList)
   const scroll = useRef();
 
   const algoliaAppId = process.env.REACT_APP_ALGOLIA_APP_ID;
@@ -56,7 +58,26 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
     return () => unsubscribe();
   }, [roomName, roomOwner, chatUser]);
 
+  
+
   const chatRoomRef = doc(collection(db, "chats"), roomID);
+  const reloadPage = async () => {
+    try {
+      const chatRoomDoc = await getDoc(chatRoomRef);
+      if (chatRoomDoc.exists()) {
+        const chatRoomData = chatRoomDoc.data();
+        setDisplayUsers(chatRoomData.userList);
+        console.log("Chat Room UserList:", chatRoomData.userList);
+      } else {
+        console.log("Chat Room not found.");
+      }
+    } catch (error) {
+      console.error("Error fetching chat room data:", error);
+    }
+  };
+
+
+
   const deleteChatRoom = async () => {
     try {
       await deleteDoc(chatRoomRef);
@@ -75,9 +96,8 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
       await updateDoc(chatRoomRef, {
         userList: updatedList,
       });
-      setShowForm(false);
-      setRoomTitle(newRoomName);
-      setEditingRoomName(false);
+
+      reloadPage()
       // window.location.replace("/chat");
     } catch (error) {
       console.error("Error editing chat: ", error);
@@ -85,17 +105,18 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
   };
 
   const removeUserFromList = (userToRemove) => {
-    const updatedList = userList.filter((user) => user !== userToRemove);
+    const updatedList = displayUsers.filter((user) => user !== userToRemove);
     handleUserListChange(updatedList);
   };
 
   const handleUserChange = (index, value) => {
-    const updatedUserList = [...userList];
+    const updatedUserList = [...displayUsers] ;
     console.log(updatedUserList);
     if (!updatedUserList.includes(value)) {
       // If it doesn't exist, add it to the end of the array
       updatedUserList.push(value);
       userListEdit(updatedUserList);
+      reloadPage()
     }
   };
 
@@ -104,8 +125,9 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
       await updateDoc(chatRoomRef, {
         userList: updatedUserList,
       });
-      setShowForm(false);
       setEditingRoomName(false);
+      setSearchInput("")
+      setSearchResults([])
     } catch (error) {
       console.error("Error editing chat user list: ", error);
     }
@@ -127,6 +149,11 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
   };
 
   const searchUsers = (value) => {
+    if (value === "" || value === " ") {
+      alert("Please enter a valid chat username");
+      setSearchInput("")
+      return;
+    }
     //THIS FUNCTION SEARCHES THE ALGOLIA INDEX OF USERS COLLECTION AND RETURNS WHAT MATCHES
     index
       .search(value)
@@ -215,7 +242,7 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
                 <div className="editBox">
                   <label>User List:</label>
                   <div id="userList-container">
-                    {userList.map((user, index) =>
+                    {displayUsers.map((user, index) =>
                       user !== roomOwner ? (
                         <div key={index}>
                           {user}
