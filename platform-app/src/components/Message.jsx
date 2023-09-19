@@ -3,7 +3,7 @@ import './Message.css'
 const Message = ({message}) => {
   return (
     <div>
-        <div className='message'>
+        <div className='message-sent'>
             <p class="message-content">{message.name}</p>
             <p>{message.text}</p>
         </div>
