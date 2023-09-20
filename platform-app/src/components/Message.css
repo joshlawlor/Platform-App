@@ -1,5 +1,6 @@
 .message-received{
     position: relative;
+    margin-right: 20px;
     margin-left: 20px;
     margin-bottom: 10px;
     padding: 10px;
@@ -10,6 +11,7 @@
     font: 400 .9em 'Open Sans', sans-serif;
     border: 1px solid #97C6E3;
     border-radius: 10px;
+    align-self: flex-start;
 }
 .message-content {
     padding: 0;
@@ -44,6 +46,8 @@
 .message-sent {
     position: relative;
     margin-left: 20px;
+    margin-right: 20px;
+
     margin-bottom: 10px;
     padding: 10px;
     background-color: #f8e896;
@@ -53,6 +57,7 @@
     font: 400 .9em 'Open Sans', sans-serif;
     border: 1px solid #f8e896;
     border-radius: 10px;
+    align-self: flex-end;
 }
 
 
