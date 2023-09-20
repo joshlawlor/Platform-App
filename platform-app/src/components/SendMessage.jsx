@@ -5,7 +5,7 @@ import { addDoc,doc, collection, serverTimestamp } from "firebase/firestore";
 
 const SendMessage = ({scroll, roomID}) => {
   const [input, setInput] = useState("");
-
+  const CHARACTER_LIMIT = 2000;
    //THIS GRABS THE SPECIFIC ROOM DOC FROM THE CHATS COLLECTION
    const chatRoomRef= doc(collection(db, 'chats'), roomID);
    //THIS GRABS THE SPECIFIC MESSAGES SUBCOLLECTION FROM THE ROOM DOC
@@ -20,8 +20,17 @@ const SendMessage = ({scroll, roomID}) => {
             return;
         }
         const {uid, displayName} = auth.currentUser
+
+        const inputText = input.slice(0, CHARACTER_LIMIT);
+
+        let truncatedInput = "";
+
+        for (let i = 0; i < inputText.length; i += 110) {
+          truncatedInput += inputText.slice(i, i + 110) + " ";
+        }
+
         await addDoc(messagesSubcollectionRef, {
-            text: input,
+            text: truncatedInput,
             name: displayName,
             uid,
             timestamp: serverTimestamp()
@@ -30,12 +39,19 @@ const SendMessage = ({scroll, roomID}) => {
         scroll.current.scrollIntoView({behavior: 'smooth'})
     }
 
+    const handleInputChange = (e) => {
+      const value = e.target.value;
+      if (value.length <= CHARACTER_LIMIT) {
+        setInput(value);
+      }
+    };  
+
   return (
     
       <form onSubmit={sendMessage} className="sendMessage">
         <input
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleInputChange}
           type="text"
           placeholder="Message"
         />
