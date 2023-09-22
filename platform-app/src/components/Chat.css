@@ -29,13 +29,25 @@
 }
 
 #chat-display-main{
-    border: 3px solid blue;
+    border: 8px solid blue;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    max-height: 70vh;
+}
+
+.messages-container::-webkit-scrollbar {
+    width: 0px;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Color of the thumb (hidden) */
 }
 
 .messages-container{
-    border: 3px solid green;
+    border: 3px solid purple;
+    min-width: 90%;
+    margin-top: 0.2%;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     text-align: center;

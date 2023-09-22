@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import "./Chat.css";
 import Message from "./Message";
 import { auth, db } from "../firebase";
@@ -35,6 +35,7 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
   const client = algoliasearch(algoliaAppId, algoliaApiKey);
   const index = client.initIndex("dev_users");
 
+  // window.location.onLoad(      scroll.current.scrollIntoView({ behavior: "smooth" }))
   useEffect(() => {
     console.log(roomOwner);
     //THIS CHECKS IF CHAT USER IS THE OWNER (GIVES THEM EDITING POWER)
@@ -180,6 +181,12 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
     setShowForm(!showForm);
   };
 
+  useLayoutEffect(() => {
+    if (scroll.current) {
+      scroll.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
+
   return (
     <>
       <div className="chat-component-main">
@@ -272,10 +279,12 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
               messages.map((message) => (
                 <Message key={message.id} message={message} />
               ))}
+            <span ref={scroll}></span>
+
           </div>
-          <SendMessage scroll={scroll} roomID={roomID} />
-          <span ref={scroll}></span>
+
         </div>
+        <SendMessage scroll={scroll} roomID={roomID} />
       </div>
     </>
   );

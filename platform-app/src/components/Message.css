@@ -4,9 +4,9 @@
   margin-left: 20px;
   margin-bottom: 10px;
   padding: 10px;
+  max-width: 50%;
   background-color: #a8ddfd;
   width: fit-content;
-  height: 50px;
   text-align: left;
   font: 400 0.9em "Open Sans", sans-serif;
   border: 1px solid #97c6e3;
@@ -46,17 +46,15 @@
   position: relative;
   margin-left: 20px;
   margin-right: 20px;
-  max-width: 70%;
-  /* overflow: hidden; */
   margin-bottom: 10px;
   padding: 10px;
+  max-width: 50%;
   background-color: #f8e896;
   width: fit-content;
   text-align: left;
   font: 400 0.9em "Open Sans", sans-serif;
   border: 1px solid #f8e896;
   border-radius: 10px;
-  padding: 10px;
   background-color: #f8e896;
   align-self: flex-end;
 }
