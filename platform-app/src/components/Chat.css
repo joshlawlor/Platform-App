@@ -29,10 +29,28 @@
 }
 
 #chat-display-main{
-    border: 8px solid blue;
+    margin: 1%;
+    border: 8px solid rgb(74, 74, 196);
     display: flex;
     justify-content: center;
     max-height: 70vh;
+    border-radius: 1%;
+    
+}
+
+#sendMessage-main-div{
+    display: flex;
+    justify-content: center;
+}
+
+.messages-container{
+    background-color: rgb(54, 54, 54);
+    min-width: 90%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: flex-end;
 }
 
 .messages-container::-webkit-scrollbar {
@@ -41,15 +59,4 @@
 
 .messages-container::-webkit-scrollbar-thumb {
     background-color: transparent; /* Color of the thumb (hidden) */
-}
-
-.messages-container{
-    border: 3px solid purple;
-    min-width: 90%;
-    margin-top: 0.2%;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: flex-end;
 }

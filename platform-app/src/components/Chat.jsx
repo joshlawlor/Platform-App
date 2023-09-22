@@ -284,7 +284,10 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
           </div>
 
         </div>
+        <div id="sendMessage-main-div">
         <SendMessage scroll={scroll} roomID={roomID} />
+
+        </div>
       </div>
     </>
   );

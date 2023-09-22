@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {auth,db} from '../firebase'
 import { addDoc,doc, collection, serverTimestamp } from "firebase/firestore";
-
+import './SendMessage.css'
 
 const SendMessage = ({scroll, roomID}) => {
   const [input, setInput] = useState("");
@@ -46,17 +46,17 @@ const SendMessage = ({scroll, roomID}) => {
     };  
 
   return (
-    
-      <form onSubmit={sendMessage} className="sendMessage">
+    <div id="sendMessage-container">
+      <button type="submit" className="message-button">ADD ATTACHMENT</button>
         <input
           value={input}
+          id="message-content-input"
           onChange={handleInputChange}
           type="text"
           placeholder="Message"
         />
-        <button type="submit">Send</button>
-      </form>
-    
+      <button  onClick={sendMessage} type="submit" className="message-button">Send</button>
+      </div>
   );
 };
 
