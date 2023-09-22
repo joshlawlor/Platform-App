@@ -45,13 +45,20 @@ const SendMessage = ({scroll, roomID}) => {
       }
     };  
 
+    const handleInputKeyPress = (e) => {
+      if (e.key === "Enter") {
+        sendMessage(e);
+      }
+    };
+  
   return (
     <div id="sendMessage-container">
       <button type="submit" className="message-button">ADD ATTACHMENT</button>
-        <input
+        <textarea
           value={input}
           id="message-content-input"
           onChange={handleInputChange}
+          onKeyPress={handleInputKeyPress}
           type="text"
           placeholder="Message"
         />

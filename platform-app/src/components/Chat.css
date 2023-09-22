@@ -1,15 +1,30 @@
-.editForm-container{
-    border: 3px solid black;
+.chat-edit-container{
+    /* border: 3px solid red; */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.editForm-container{
+    /* border: 3px solid black; */
+    display: flex;
+    flex-direction: column;
+    min-width: 50%;
+    margin: 1%;
+    text-align: center;
+    align-items: center;
 }
 
 .editForm{
-    border: 3px solid blue;
+    border: 8px solid rgb(74, 74, 196);
+    border-radius: 2%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
     min-width: 100%;
-
+    background-color: rgb(54, 54, 54);
+    color: rgb(74, 74, 196)
 }
 
 .editBox{
