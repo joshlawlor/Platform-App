@@ -27,6 +27,8 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [messages, setMessages] = useState([]);
   const [displayUsers, setDisplayUsers] = useState(userList);
+  const [isScrollAtTop, setIsScrollAtTop] = useState(true);
+
   const scroll = useRef();
 
   const algoliaAppId = process.env.REACT_APP_ALGOLIA_APP_ID;
@@ -35,9 +37,39 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
   const client = algoliasearch(algoliaAppId, algoliaApiKey);
   const index = client.initIndex("dev_users");
 
+  const handleScroll = () => {
+    if (scroll.current.scrollTop === 0) {
+      setIsScrollAtTop(true);
+    } else {
+      setIsScrollAtTop(false);
+    }
+  };
+
+  const scrollToBottom = () => {
+    scroll.current.scrollIntoView({ behavior: "smooth" });
+    setIsScrollAtTop(false);
+  };
+  const scrollToTop = () => {
+      const messagesContainer = document.querySelector(".messages-container");
+    if (messagesContainer) {
+      messagesContainer.scrollTop = 0;
+      setIsScrollAtTop(true);
+    }
+  };
+
+  useEffect(() => {
+    const messagesContainer = scroll.current;
+    messagesContainer.addEventListener("scroll", handleScroll);
+    return () => {
+      messagesContainer.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+
   // window.location.onLoad(      scroll.current.scrollIntoView({ behavior: "smooth" }))
   useEffect(() => {
-    console.log(roomOwner);
+    console.log('USEFFECT RAN');
+    const messagesContainer = scroll.current;
     //THIS CHECKS IF CHAT USER IS THE OWNER (GIVES THEM EDITING POWER)
     if (roomOwner === chatUser.displayName) {
       setIsOwner(chatUser.displayName);
@@ -55,7 +87,11 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
         messages.push({ ...doc.data(), id: doc.id });
       });
       setMessages(messages);
+    
+      
+    
     });
+   
     return () => unsubscribe();
   }, [roomName, roomOwner, chatUser]);
 
@@ -274,13 +310,23 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
         </div>
         <br />
         <div id="chat-display-main">
+        
           <div className="messages-container">
+          {isScrollAtTop && (
+            <button className="scroll-button" onClick={scrollToBottom}>
+              Scroll to Bottom
+            </button>
+          )}
             {messages &&
               messages.map((message) => (
                 <Message key={message.id} message={message} />
-              ))}
+              ))}     
+                {!isScrollAtTop && (
+            <button className="scroll-button" onClick={scrollToTop}>
+              Scroll to Top
+            </button>
+          )}
             <span ref={scroll}></span>
-
           </div>
 
         </div>
