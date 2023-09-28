@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import {auth,db} from '../firebase'
 import { addDoc,doc, collection, serverTimestamp } from "firebase/firestore";
-
+import './SendMessage.css'
 
 const SendMessage = ({scroll, roomID}) => {
   const [input, setInput] = useState("");
-
+  const CHARACTER_LIMIT = 20000;
    //THIS GRABS THE SPECIFIC ROOM DOC FROM THE CHATS COLLECTION
    const chatRoomRef= doc(collection(db, 'chats'), roomID);
    //THIS GRABS THE SPECIFIC MESSAGES SUBCOLLECTION FROM THE ROOM DOC
@@ -20,8 +20,16 @@ const SendMessage = ({scroll, roomID}) => {
             return;
         }
         const {uid, displayName} = auth.currentUser
+
+        const inputText = input.slice(0, CHARACTER_LIMIT);
+        let truncatedInput = "";
+
+        for (let i = 0; i < inputText.length; i += 74) {
+          truncatedInput += inputText.slice(i, i + 74) + " ";
+        }
+
         await addDoc(messagesSubcollectionRef, {
-            text: input,
+            text: truncatedInput,
             name: displayName,
             uid,
             timestamp: serverTimestamp()
@@ -30,18 +38,32 @@ const SendMessage = ({scroll, roomID}) => {
         scroll.current.scrollIntoView({behavior: 'smooth'})
     }
 
+    const handleInputChange = (e) => {
+      const value = e.target.value;
+      if (value.length <= CHARACTER_LIMIT) {
+        setInput(value);
+      }
+    };  
+
+    const handleInputKeyPress = (e) => {
+      if (e.key === "Enter") {
+        sendMessage(e);
+      }
+    };
+  
   return (
-    
-      <form onSubmit={sendMessage} className="sendMessage">
-        <input
+    <div id="sendMessage-container">
+      <button type="submit" className="message-button">ADD ATTACHMENT</button>
+        <textarea
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          id="message-content-input"
+          onChange={handleInputChange}
+          onKeyPress={handleInputKeyPress}
           type="text"
           placeholder="Message"
         />
-        <button type="submit">Send</button>
-      </form>
-    
+      <button  onClick={sendMessage} type="submit" className="message-button">Send</button>
+      </div>
   );
 };
 

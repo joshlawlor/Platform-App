@@ -101,6 +101,7 @@ const CreateChat = () => {
     await addDoc(messagesSubcollectionRef, {
       text: "Chat Created",
       timestamp: serverTimestamp(),
+      uid: uid,
     });
 
  

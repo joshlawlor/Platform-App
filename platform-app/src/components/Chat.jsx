@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import "./Chat.css";
 import Message from "./Message";
 import { auth, db } from "../firebase";
@@ -26,7 +26,9 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [messages, setMessages] = useState([]);
-  const [displayUsers, setDisplayUsers] = useState(userList)
+  const [displayUsers, setDisplayUsers] = useState(userList);
+  const [isScrollAtTop, setIsScrollAtTop] = useState(true);
+
   const scroll = useRef();
 
   const algoliaAppId = process.env.REACT_APP_ALGOLIA_APP_ID;
@@ -35,8 +37,38 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
   const client = algoliasearch(algoliaAppId, algoliaApiKey);
   const index = client.initIndex("dev_users");
 
+  const handleScroll = () => {
+    if (scroll.current.scrollTop === 0) {
+      setIsScrollAtTop(true);
+    } else {
+      setIsScrollAtTop(false);
+    }
+  };
+
+  const scrollToBottom = () => {
+    scroll.current.scrollIntoView({ behavior: "smooth" });
+    setIsScrollAtTop(false);
+  };
+  const scrollToTop = () => {
+    const messagesContainer = document.querySelector(".messages-container");
+    if (messagesContainer) {
+      messagesContainer.scrollTop = 0;
+      setIsScrollAtTop(true);
+    }
+  };
+
   useEffect(() => {
-    console.log(roomOwner);
+    const messagesContainer = scroll.current;
+    messagesContainer.addEventListener("scroll", handleScroll);
+    return () => {
+      messagesContainer.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // window.location.onLoad(      scroll.current.scrollIntoView({ behavior: "smooth" }))
+  useEffect(() => {
+    console.log("USEFFECT RAN");
+    const messagesContainer = scroll.current;
     //THIS CHECKS IF CHAT USER IS THE OWNER (GIVES THEM EDITING POWER)
     if (roomOwner === chatUser.displayName) {
       setIsOwner(chatUser.displayName);
@@ -55,10 +87,9 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
       });
       setMessages(messages);
     });
+
     return () => unsubscribe();
   }, [roomName, roomOwner, chatUser]);
-
-  
 
   const chatRoomRef = doc(collection(db, "chats"), roomID);
   const reloadPage = async () => {
@@ -75,8 +106,6 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
       console.error("Error fetching chat room data:", error);
     }
   };
-
-
 
   const deleteChatRoom = async () => {
     try {
@@ -97,7 +126,7 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
         userList: updatedList,
       });
 
-      reloadPage()
+      reloadPage();
       // window.location.replace("/chat");
     } catch (error) {
       console.error("Error editing chat: ", error);
@@ -110,13 +139,13 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
   };
 
   const handleUserChange = (index, value) => {
-    const updatedUserList = [...displayUsers] ;
+    const updatedUserList = [...displayUsers];
     console.log(updatedUserList);
     if (!updatedUserList.includes(value)) {
       // If it doesn't exist, add it to the end of the array
       updatedUserList.push(value);
       userListEdit(updatedUserList);
-      reloadPage()
+      reloadPage();
     }
   };
 
@@ -126,8 +155,8 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
         userList: updatedUserList,
       });
       setEditingRoomName(false);
-      setSearchInput("")
-      setSearchResults([])
+      setSearchInput("");
+      setSearchResults([]);
     } catch (error) {
       console.error("Error editing chat user list: ", error);
     }
@@ -151,7 +180,7 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
   const searchUsers = (value) => {
     if (value === "" || value === " ") {
       alert("Please enter a valid chat username");
-      setSearchInput("")
+      setSearchInput("");
       return;
     }
     //THIS FUNCTION SEARCHES THE ALGOLIA INDEX OF USERS COLLECTION AND RETURNS WHAT MATCHES
@@ -183,6 +212,12 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
   const openEditForm = () => {
     setShowForm(!showForm);
   };
+
+  useLayoutEffect(() => {
+    if (scroll.current) {
+      scroll.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
 
   return (
     <>
@@ -270,16 +305,30 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
           )}
         </div>
         <br />
-        <div className="messages-container">
-          {messages &&
-            messages.map((message) => (
-              <Message key={message.id} message={message} />
-            ))}
+        <div id="chat-display-main">
+          <div className="messages-container">
+            {isScrollAtTop && (
+              <button className="scroll-button" onClick={scrollToBottom}>
+                Scroll to Bottom
+              </button>
+            )}
+            {messages &&
+              messages.map((message) => (
+                <Message key={message.id} message={message} />
+              ))}
+           
+            <span ref={scroll}></span>
+          </div>
+        </div>
+        {!isScrollAtTop && (
+              <button className="scroll-button-bottom" onClick={scrollToTop}>
+                Scroll to Top
+              </button>
+            )}
+        <div id="sendMessage-main-div">
+          <SendMessage scroll={scroll} roomID={roomID} />
         </div>
       </div>
-      <SendMessage scroll={scroll} roomID={roomID} />
-      {/* Send Message Component */}
-      <span ref={scroll}></span>
     </>
   );
 };

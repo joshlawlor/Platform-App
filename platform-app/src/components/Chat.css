@@ -1,15 +1,30 @@
-.editForm-container{
-    border: 3px solid black;
+.chat-edit-container{
+    /* border: 3px solid red; */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.editForm-container{
+    /* border: 3px solid black; */
+    display: flex;
+    flex-direction: column;
+    min-width: 50%;
+    margin: 1%;
+    text-align: center;
+    align-items: center;
 }
 
 .editForm{
-    border: 3px solid blue;
+    border: 8px solid rgb(74, 74, 196);
+    border-radius: 2%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
     min-width: 100%;
-
+    background-color: rgb(54, 54, 54);
+    color: rgb(74, 74, 196)
 }
 
 .editBox{
@@ -27,3 +42,86 @@
     text-align: center;
     
 }
+
+#chat-display-main{
+    margin: 1%;
+    border: 8px solid rgb(74, 74, 196);
+    display: flex;
+    justify-content: center;
+    max-height: 70vh;
+    border-radius: 1%;
+    
+}
+
+#sendMessage-main-div{
+    display: flex;
+    justify-content: center;
+}
+
+.messages-container{
+    background-color: rgb(54, 54, 54);
+    min-width: 90%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: flex-end;
+    position: relative;
+
+}
+
+.messages-container::-webkit-scrollbar {
+    width: 0px;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Color of the thumb (hidden) */
+}
+
+.scroll-button {
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    right: 10px; /* Adjust the right position as needed */
+    z-index: 1; /* Ensures the button appears above the messages */
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+  }
+
+  .scroll-button.bottom {
+    /* Styles for "scroll to top" button at the bottom */
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .scroll-button:not(.bottom) {
+    /* Styles for "scroll to bottom" button at the top */
+    top: 10px;
+    right: 10px;
+  }
+  
+  .scroll-button:hover {
+    background-color: #0056b3;
+  }
+
+  .scroll-button-bottom {
+    position: absolute;
+    bottom: end;
+    right: 10px; /* Adjust the right position as needed */
+    z-index: 1; /* Ensures the button appears above the messages */
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .scroll-button-bottom:hover {
+    background-color: #0056b3;
+  }
