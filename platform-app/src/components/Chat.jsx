@@ -50,7 +50,7 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
     setIsScrollAtTop(false);
   };
   const scrollToTop = () => {
-      const messagesContainer = document.querySelector(".messages-container");
+    const messagesContainer = document.querySelector(".messages-container");
     if (messagesContainer) {
       messagesContainer.scrollTop = 0;
       setIsScrollAtTop(true);
@@ -65,10 +65,9 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
     };
   }, []);
 
-
   // window.location.onLoad(      scroll.current.scrollIntoView({ behavior: "smooth" }))
   useEffect(() => {
-    console.log('USEFFECT RAN');
+    console.log("USEFFECT RAN");
     const messagesContainer = scroll.current;
     //THIS CHECKS IF CHAT USER IS THE OWNER (GIVES THEM EDITING POWER)
     if (roomOwner === chatUser.displayName) {
@@ -87,11 +86,8 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
         messages.push({ ...doc.data(), id: doc.id });
       });
       setMessages(messages);
-    
-      
-    
     });
-   
+
     return () => unsubscribe();
   }, [roomName, roomOwner, chatUser]);
 
@@ -310,29 +306,27 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
         </div>
         <br />
         <div id="chat-display-main">
-        
           <div className="messages-container">
-          {isScrollAtTop && (
-            <button className="scroll-button" onClick={scrollToBottom}>
-              Scroll to Bottom
-            </button>
-          )}
+            {isScrollAtTop && (
+              <button className="scroll-button" onClick={scrollToBottom}>
+                Scroll to Bottom
+              </button>
+            )}
             {messages &&
               messages.map((message) => (
                 <Message key={message.id} message={message} />
-              ))}     
-                {!isScrollAtTop && (
-            <button className="scroll-button" onClick={scrollToTop}>
-              Scroll to Top
-            </button>
-          )}
+              ))}
+           
             <span ref={scroll}></span>
           </div>
-
         </div>
+        {!isScrollAtTop && (
+              <button className="scroll-button-bottom" onClick={scrollToTop}>
+                Scroll to Top
+              </button>
+            )}
         <div id="sendMessage-main-div">
-        <SendMessage scroll={scroll} roomID={roomID} />
-
+          <SendMessage scroll={scroll} roomID={roomID} />
         </div>
       </div>
     </>
