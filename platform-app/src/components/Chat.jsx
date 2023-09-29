@@ -68,7 +68,6 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
   // window.location.onLoad(      scroll.current.scrollIntoView({ behavior: "smooth" }))
   useEffect(() => {
     console.log("USEFFECT RAN");
-    const messagesContainer = scroll.current;
     //THIS CHECKS IF CHAT USER IS THE OWNER (GIVES THEM EDITING POWER)
     if (roomOwner === chatUser.displayName) {
       setIsOwner(chatUser.displayName);
@@ -89,7 +88,7 @@ const Chat = ({ roomID, roomName, roomOwner, userList }) => {
     });
 
     return () => unsubscribe();
-  }, [roomName, roomOwner, chatUser]);
+  }, [roomName, roomOwner, roomID, chatUser]);
 
   const chatRoomRef = doc(collection(db, "chats"), roomID);
   const reloadPage = async () => {
