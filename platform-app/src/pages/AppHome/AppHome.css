@@ -18,39 +18,8 @@
     
 }
 
-.castle-wall-container{
-    justify-content: flex-end;
-}
 
-.castle-wall{
-    /* border: 3px solid blue; */
-    background-color: gray !important;
-    min-width: 100vw;
-    height: 75.5vh;
-    background-image: url('../../assets/images/stone.avif');
-    background-repeat:  repeat;
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-
-.rampart-container{
-    /* border: 3px solid red; */
-    display: flex;
-    justify-content: space-between;
-}
-
-.rampart{
-    /* border: 3px solid black; */
-    border-radius: 10px;
-    background-image: url('../../assets/images/stone.avif');
-    min-height: 75px;
-    max-width: 300px;
-    min-width: 175px;
-    margin-bottom: -20px;
-    position: relative;
-}
-
+/* 
 .forum-container{
     border: 3px solid red;
     min-width: 80vw;
@@ -69,4 +38,14 @@
     align-items: center;
 
     border-radius: 25px;
+} */
+
+
+.campaign-display-container{
+    border: 3px solid black;
+    min-width: 99%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
 }
